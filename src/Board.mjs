@@ -15,6 +15,12 @@ export class Board {
     }
     return boardToString
   }
+
+  hasFalling() {
+    return true
+  }
+
+
   drop(block) {
     const middleIndex = Math.floor(this.width / 2)
     if (this.board[0][middleIndex] !== '.') {
