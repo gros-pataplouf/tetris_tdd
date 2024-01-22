@@ -1,6 +1,7 @@
 export class Board {
   width;
   height;
+  falling = false;
 
   constructor(width, height) {
     this.width = width;
@@ -17,7 +18,7 @@ export class Board {
   }
 
   hasFalling() {
-    return true
+    return this.falling
   }
 
 
@@ -29,11 +30,16 @@ export class Board {
     this.board[0][middleIndex] = block
   }
   tick() {
+    this.falling = true
     for (let i = this.height - 1; i >= 0; i--) {
       for (let j = this.width - 1; j >= 0; j--) {
         if (this.board[i][j] !== '.') {
-          this.board[i+1][j] = this.board[i][j]
-          this.board[i][j] = '.'
+          if (i+1 < this.height) {
+            this.board[i+1][j] = this.board[i][j]
+            this.board[i][j] = '.'            
+          } else {
+            this.falling = false
+          }
         }
       }
     }
