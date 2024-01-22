@@ -16,19 +16,19 @@ describe("Falling blocks", () => {
     );
   });
 
-  // describe("When a block is dropped", () => {
-  //   beforeEach(() => {
-  //     board.drop("X");
-  //   });
+  describe("When a block is dropped", () => {
+    beforeEach(() => {
+      board.drop("X");
+    });
 
-  //   test("it starts from the top middle", () => {
-  //     expect(board.toString()).to.equalShape(
-  //       `.X.
-  //        ...
-  //        ...`
-  //     );
-  //   });
-  // })
+    test("it starts from the top middle", () => {
+      expect(board.toString()).to.equalShape(
+        `.X.
+         ...
+         ...`
+      );
+    });
+  })
     /*
 
     test.skip("it moves down one row per tick", () => {
