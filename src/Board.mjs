@@ -5,9 +5,14 @@ export class Board {
   constructor(width, height) {
     this.width = width;
     this.height = height;
+    this.board = Array(height).fill(Array.from('.'.repeat(width)))
   }
 
   toString() {
-    return ('.'.repeat(this.width).concat('\n')).repeat(this.height);
+    let boardToString = '';
+    for (let row of this.board) {
+      boardToString += row.concat('\n').join('')
+    }
+    return boardToString
   }
 }
