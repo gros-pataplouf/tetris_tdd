@@ -21,4 +21,8 @@ export class RotatingShape {
         const stringRepOfRotatedShape = this.#matrixToString(copyOfShape)
         return new RotatingShape(stringRepOfRotatedShape)
     }
+    rotateLeft() {
+        return this.rotateRight().rotateRight().rotateRight()
+    }
+
 }
