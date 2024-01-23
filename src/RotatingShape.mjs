@@ -1,9 +1,11 @@
 export class RotatingShape {
     constructor(shape) {
-        this.shape = shape.split('\n').map(elt => Array.from(elt.trim()))
+        this.shape = shape.split('\n').map(elt => elt.trim().split(''))
         Object.freeze(this)
     }
     toString(){
-        return this.shape.map(elt => elt.concat('\n').join('')).join('')
-    }
+        const joinedSubarrays =  this.shape.map(elt => elt.join('')).map(x => x + '\n')
+        const reconstitutedShapeString = joinedSubarrays.reduce((acc, subarr) => acc.concat(subarr))
+        return reconstitutedShapeString
+    }        
 }
