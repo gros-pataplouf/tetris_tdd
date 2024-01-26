@@ -6,6 +6,14 @@ RotatingShape.T_SHAPE = new RotatingShape(
     TTT
     ...`)
 
+RotatingShape.I_SHAPE = new RotatingShape(
+    `.....
+    .....
+    IIII.
+    .....
+    .....`
+)
+
 export {
     RotatingShape as Tetromino
 }
