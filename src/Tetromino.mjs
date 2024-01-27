@@ -5,12 +5,12 @@ export const Tetromino = {
         `.T.
         TTT
         ...`),
-I_SHAPE : new RotatingShape(
-    `.....
-    .....
-    IIII.
-    .....
-    .....`
-)
+    I_SHAPE : new RotatingShape(
+        `.....
+        .....
+        IIII.
+        .....
+        .....`
+    )
 }
 
