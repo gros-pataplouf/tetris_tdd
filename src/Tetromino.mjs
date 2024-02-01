@@ -4,12 +4,14 @@ const ComplexMixin = Sup => class extends Sup {
     constructor(shape, orientations = 4) {
         super(shape)
         this.orientations = orientations
+   
     }
     static getShapeOrientations() {
         let shapes = []
         for (let i = 0; i < this.orientations; i++) {
             shapes.push(this.rotateRight())
         }
+        this.shapes = shapes
     }
 }
 
