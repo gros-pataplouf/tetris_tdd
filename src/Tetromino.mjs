@@ -1,8 +1,9 @@
 import { RotatingShape } from "./RotatingShape.mjs"
 
 const ComplexMixin = Sup => class extends Sup {
-    testMethod() {
-        console.log("test")
+    constructor(shape, orientations = 4) {
+        super(shape)
+        this.orientations = orientations
     }}
 
 class Tetro extends ComplexMixin(RotatingShape) {}
@@ -17,6 +18,6 @@ export const Tetromino = {
         .....
         IIII.
         .....
-        .....`
+        .....`, 2
     )
 }
