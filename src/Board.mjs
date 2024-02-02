@@ -31,14 +31,16 @@ export class Board {
     }
   }
 
-
   drop(block) {
-    const middleIndex = Math.floor(this.width / 2)
-    console.log(this.blockToMatrix(block))
-    if (this.board[0][middleIndex] !== '.') {
+    const boardMiddle = Math.floor(this.width / 2)
+    const blocktoMatrix = this.blockToMatrix(block)
+    if (this.board[0][boardMiddle] !== '.') {
       throw new Error('already falling')
     }
-    this.board[0][middleIndex] = block
+    const shapeMiddle = Math.floor(blocktoMatrix.width / 2)
+    const offset = boardMiddle - shapeMiddle
+    this.board[0][boardMiddle] = block
+    
   }
   tick() {
     for (let i = this.height - 1; i >= 0; i--) {
