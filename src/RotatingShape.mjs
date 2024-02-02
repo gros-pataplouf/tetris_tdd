@@ -19,10 +19,7 @@ class Shape {
 
 }
 
-export class RotatingShape {
-    constructor(shape) {
-        this.shape = shape.trim().split('\n').map(elt => elt.trim().split(''))
-    }
+export class RotatingShape extends RotatableSimple(Shape){
     #matrixToString(matrix) {
         const joinedSubarrays =  matrix.map(elt => elt.join('')).map(x => x + '\n')
         const reconstitutedShapeString = joinedSubarrays.reduce((acc, subarr) => acc.concat(subarr))
