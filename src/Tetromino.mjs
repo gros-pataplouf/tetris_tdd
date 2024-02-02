@@ -4,6 +4,9 @@ const RotatableComplex = Sup => class extends Sup {
     constructor(shape, orientations = 4) {
         super(shape)
         this.orientations = orientations
+        this.variants = Array(4).fill("").map((elt, index) => {
+            return this.toString()
+        })
     }
     rotateRight() {
         const copyOfShape = this.shape.map(elt => elt.map(x => x))
