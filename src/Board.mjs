@@ -26,7 +26,8 @@ export class Board {
     if (block instanceof Shape) {
       return block.shape
     } else {
-      return block.trim().split('\n').map(elt => elt.trim().split(''))
+      const blockShape = new Shape(block)
+      return blockShape.shape
     }
   }
 
