@@ -5,11 +5,16 @@ const RotatableComplex = Sup => class extends Sup {
     constructor(shape, orientations = 4) {
         super(shape)
         this.orientations = orientations
-        this.variants = Array(4).fill("").map((elt, index) => {
-            return this.toString()
+        this.variants = Array(this.orientations).fill("").map((elt, index) => {
+            let rotationResult = this.shape
+            for (let i = 0; i < index; i++) {
+                rotationResult = rotateMatrix(rotationResult)                  
+            }
+            return rotationResult
         })
     }
     rotateRight() {
+        console.log(this.variants)
         const rotatedMatrix = rotateMatrix(this.shape)
         const stringRepr = this.matrixToString(rotatedMatrix)
         return new RotatingTetromino(stringRepr)
