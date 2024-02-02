@@ -29,7 +29,7 @@ class Shape {
 }
 
 export class RotatingShape extends RotatableSimple(Shape){
-    rotateRight() {
+    doNothing() {
         const copyOfShape = this.shape.map(elt => elt.map(x => x))
         for (let i = 0; i < this.shape.length; i ++) {
             for (let j = 0; j < this.shape.length; j++) {
