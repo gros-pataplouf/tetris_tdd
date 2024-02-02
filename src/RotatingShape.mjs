@@ -1,3 +1,9 @@
+const RotatableSimple = Sup => class extends Sup {
+    rotateLeft() {
+        return this.rotateRight().rotateRight().rotateRight()
+    }    
+}
+
 export class RotatingShape {
     constructor(shape) {
         this.shape = shape.trim().split('\n').map(elt => elt.trim().split(''))
