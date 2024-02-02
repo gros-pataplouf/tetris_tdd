@@ -4,6 +4,12 @@ const RotatableSimple = Sup => class extends Sup {
     }    
 }
 
+class Shape {
+    constructor(shape) {
+        this.shape = shape.trim().split('\n').map(elt => elt.trim().split(''))
+    }
+}
+
 export class RotatingShape {
     constructor(shape) {
         this.shape = shape.trim().split('\n').map(elt => elt.trim().split(''))
