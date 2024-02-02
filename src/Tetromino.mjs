@@ -1,10 +1,12 @@
-import { RotatingShape } from "./RotatingShape.mjs"
+import { RotatingShape, Shape } from "./RotatingShape.mjs"
 
 const RotatableComplex = Sup => class extends Sup {
     constructor(shape, orientations = 4) {
         super(shape)
         this.orientations = orientations
-   
+    }
+    rotateLeft() {
+        return this.rotateRight().rotateRight().rotateRight()
     }
 }
 

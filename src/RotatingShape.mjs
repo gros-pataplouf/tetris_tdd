@@ -14,7 +14,7 @@ const RotatableSimple = Sup => class extends Sup {
     }    
 }
 
-class Shape {
+export class Shape {
     constructor(shape) {
         this.shape = shape.trim().split('\n').map(elt => elt.trim().split(''))
     }
@@ -28,8 +28,4 @@ class Shape {
     }
 }
 
-export class RotatingShape extends RotatableSimple(Shape){
-    doNothing() {
-        return new RotatingShape(stringRepOfRotatedShape)
-    }
-}
+export class RotatingShape extends RotatableSimple(Shape){}
