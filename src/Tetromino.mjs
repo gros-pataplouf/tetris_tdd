@@ -10,7 +10,7 @@ const RotatableComplex = Sup => class extends Sup {
             for (let i = 0; i < index; i++) {
                 rotationResult = rotateMatrix(rotationResult)                  
             }
-            return rotationResult
+            return this.toString(rotationResult)
         })
     }
     rotateRight() {
