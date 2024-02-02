@@ -12,13 +12,4 @@ const RotatableSimple = Sup => class extends Sup {
     }    
 }
 
-export class Shape_ {
-    constructor(shape) {
-        this.shape = shape.trim().split('\n').map(elt => elt.trim().split(''))
-    }
-    toString(){
-        return this.matrixToString(this.shape)
-    }
-}
-
 export class RotatingShape extends RotatableSimple(Shape){}
