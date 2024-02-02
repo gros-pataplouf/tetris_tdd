@@ -1,11 +1,12 @@
+import { isNonNullExpression } from "typescript"
 import { Shape } from "./RotatingShape.mjs"
 import { rotateMatrix } from "./helpers.mjs"
 
 const RotatableComplex = Sup => class extends Sup {
-    constructor(shape, orientations = 4) {
+    constructor(shape, orientations = 4, variants = null) {
         super(shape)
         this.orientations = orientations
-        this.variants = Array(this.orientations).fill("").map((elt, index) => {
+        this.variants = variants || Array(this.orientations).fill("").map((elt, index) => {
             let rotationResult = this.shape
             for (let i = 0; i < index; i++) {
                 rotationResult = rotateMatrix(rotationResult)                  
@@ -17,7 +18,7 @@ const RotatableComplex = Sup => class extends Sup {
         const currentStringRepr = this.toString()
         const currentRotationIndex = this.variants.indexOf(currentStringRepr)
         const rotatedStringRepr = this.variants[(currentRotationIndex + 1) % this.variants.length ]
-        return new RotatingTetromino(rotatedStringRepr)
+        return new RotatingTetromino(rotatedStringRepr, this.orientations, this.variants)
     }
     rotateLeft() {
         return this.rotateRight().rotateRight().rotateRight()
