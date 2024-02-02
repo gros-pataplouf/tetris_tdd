@@ -34,13 +34,10 @@ export class Board {
   drop(block) {
     const boardMiddle = Math.floor(this.width / 2)
     const blocktoMatrix = this.shapeFormatter(block)
-    console.log(blocktoMatrix.shape)
     if (this.board[0][boardMiddle] !== '.') {
       throw new Error('already falling')
     }
-    const shapeMiddle = Math.floor(blocktoMatrix.width / 2)
-    const offset = boardMiddle - shapeMiddle
-    console.log(offset)
+    const offset = Math.floor((this.width - blocktoMatrix.width)/2)
     for (let i = 0; i < blocktoMatrix.height; i++) {
       for (let j = offset; j - offset < blocktoMatrix.width; j++) {
         this.board[i][j] = blocktoMatrix.shape[i][j-offset]
