@@ -20,14 +20,6 @@ class Shape {
 }
 
 export class RotatingShape extends RotatableSimple(Shape){
-    matrixToString(matrix) {
-        const joinedSubarrays =  matrix.map(elt => elt.join('')).map(x => x + '\n')
-        const reconstitutedShapeString = joinedSubarrays.reduce((acc, subarr) => acc.concat(subarr))
-        return reconstitutedShapeString
-    }
-    toString(){
-        return this.matrixToString(this.shape)
-    }
     rotateRight() {
         const copyOfShape = this.shape.map(elt => elt.map(x => x))
         for (let i = 0; i < this.shape.length; i ++) {
