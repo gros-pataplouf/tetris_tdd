@@ -8,25 +8,25 @@ class Shape {
     constructor(shape) {
         this.shape = shape.trim().split('\n').map(elt => elt.trim().split(''))
     }
-    #matrixToString(matrix) {
+    matrixToString(matrix) {
         const joinedSubarrays =  matrix.map(elt => elt.join('')).map(x => x + '\n')
         const reconstitutedShapeString = joinedSubarrays.reduce((acc, subarr) => acc.concat(subarr))
         return reconstitutedShapeString
     }
     toString(){
-        return this.#matrixToString(this.shape)
+        return this.matrixToString(this.shape)
     }
 
 }
 
 export class RotatingShape extends RotatableSimple(Shape){
-    #matrixToString(matrix) {
+    matrixToString(matrix) {
         const joinedSubarrays =  matrix.map(elt => elt.join('')).map(x => x + '\n')
         const reconstitutedShapeString = joinedSubarrays.reduce((acc, subarr) => acc.concat(subarr))
         return reconstitutedShapeString
     }
     toString(){
-        return this.#matrixToString(this.shape)
+        return this.matrixToString(this.shape)
     }
     rotateRight() {
         const copyOfShape = this.shape.map(elt => elt.map(x => x))
@@ -35,7 +35,7 @@ export class RotatingShape extends RotatableSimple(Shape){
                 copyOfShape[j][this.shape.length - 1 - i] = this.shape[i][j]
             }
         }
-        const stringRepOfRotatedShape = this.#matrixToString(copyOfShape)
+        const stringRepOfRotatedShape = this.matrixToString(copyOfShape)
         return new RotatingShape(stringRepOfRotatedShape)
     }
     rotateLeft() {
