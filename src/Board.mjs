@@ -22,18 +22,18 @@ export class Board {
   hasFalling() {
     return this.#falling
   }
-  blockToMatrix(block) {
-    if (block instanceof Shape) {
-      return block
+  shapeFormatter(shape) {
+    if (shape instanceof Shape) {
+      return shape
     } else {
-      const blockShape = new Shape(block)
-      return blockShape
+      const newShape = new Shape(shape)
+      return newShape
     }
   }
 
   drop(block) {
     const boardMiddle = Math.floor(this.width / 2)
-    const blocktoMatrix = this.blockToMatrix(block)
+    const blocktoMatrix = this.shapeFormatter(block)
     console.log(blocktoMatrix.shape)
     if (this.board[0][boardMiddle] !== '.') {
       throw new Error('already falling')
