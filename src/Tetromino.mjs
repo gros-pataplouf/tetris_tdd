@@ -11,8 +11,8 @@ const RotatableComplex = Sup => class extends Sup {
     }
     rotateRight() {
         const rotatedMatrix = rotateMatrix(this.shape)
-        const stringRepOfRotatedShape = this.matrixToString(rotatedMatrix)
-        return new RotatingTetromino(stringRepOfRotatedShape)
+        const stringRepr = this.matrixToString(rotatedMatrix)
+        return new RotatingTetromino(stringRepr)
     }
     rotateLeft() {
         return this.rotateRight().rotateRight().rotateRight()
