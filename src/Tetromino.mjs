@@ -1,4 +1,4 @@
-import { RotatingShape, Shape } from "./RotatingShape.mjs"
+import { Shape } from "./RotatingShape.mjs"
 
 const RotatableComplex = Sup => class extends Sup {
     constructor(shape, orientations = 4) {
@@ -13,21 +13,21 @@ const RotatableComplex = Sup => class extends Sup {
             }
         }
         const stringRepOfRotatedShape = this.matrixToString(copyOfShape)
-        return new RotatingShape(stringRepOfRotatedShape)
+        return new RotatingTetromino(stringRepOfRotatedShape)
     }
     rotateLeft() {
         return this.rotateRight().rotateRight().rotateRight()
     }
 }
 
-class Tetro extends RotatableComplex(RotatingShape) {}
+class RotatingTetromino extends RotatableComplex(Shape) {}
 
 export const Tetromino = {
-    T_SHAPE : new Tetro(
+    T_SHAPE : new RotatingTetromino(
         `.T.
         TTT
         ...`),
-    I_SHAPE : new Tetro(
+    I_SHAPE : new RotatingTetromino(
         `.....
         .....
         IIII.
