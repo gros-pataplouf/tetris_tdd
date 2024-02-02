@@ -1,5 +1,4 @@
-import { isNonNullExpression } from "typescript"
-import { Shape } from "./RotatingShape.mjs"
+import { Shape } from "./Shape.mjs"
 import { rotateMatrix } from "./helpers.mjs"
 
 const RotatableComplex = Sup => class extends Sup {
