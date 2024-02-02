@@ -1,3 +1,5 @@
+import { Shape } from './Shape'
+
 export class Board {
   width;
   height;
@@ -20,10 +22,18 @@ export class Board {
   hasFalling() {
     return this.#falling
   }
+  blockToMatrix(block) {
+    if (block instanceof Shape) {
+      return block.shape
+    } else {
+      return block.trim().split('\n').map(elt => elt.trim().split(''))
+    }
+  }
 
 
   drop(block) {
     const middleIndex = Math.floor(this.width / 2)
+    console.log(this.blockToMatrix(block))
     if (this.board[0][middleIndex] !== '.') {
       throw new Error('already falling')
     }
