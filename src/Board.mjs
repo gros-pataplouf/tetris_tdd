@@ -1,4 +1,4 @@
-import { Shape } from './Shape'
+import { Shape } from "./Shape.mjs";
 
 export class Board {
   width;
@@ -24,23 +24,28 @@ export class Board {
   }
   blockToMatrix(block) {
     if (block instanceof Shape) {
-      return block.shape
+      return block
     } else {
       const blockShape = new Shape(block)
-      return blockShape.shape
+      return blockShape
     }
   }
 
   drop(block) {
     const boardMiddle = Math.floor(this.width / 2)
     const blocktoMatrix = this.blockToMatrix(block)
+    console.log(blocktoMatrix.shape)
     if (this.board[0][boardMiddle] !== '.') {
       throw new Error('already falling')
     }
     const shapeMiddle = Math.floor(blocktoMatrix.width / 2)
     const offset = boardMiddle - shapeMiddle
-    this.board[0][boardMiddle] = block
-    
+    console.log(offset)
+    for (let i = 0; i < blocktoMatrix.height; i++) {
+      for (let j = offset; j - offset < blocktoMatrix.width; j++) {
+        this.board[i][j] = blocktoMatrix.shape[i][j-offset]
+      }
+    }
   }
   tick() {
     for (let i = this.height - 1; i >= 0; i--) {
