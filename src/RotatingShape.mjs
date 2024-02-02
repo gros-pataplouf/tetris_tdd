@@ -30,7 +30,4 @@ export class RotatingShape extends RotatableSimple(Shape){
         const stringRepOfRotatedShape = this.matrixToString(copyOfShape)
         return new RotatingShape(stringRepOfRotatedShape)
     }
-    rotateLeft() {
-        return this.rotateRight().rotateRight().rotateRight()
-    }
 }
