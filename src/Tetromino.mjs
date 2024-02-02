@@ -5,6 +5,16 @@ const RotatableComplex = Sup => class extends Sup {
         super(shape)
         this.orientations = orientations
     }
+    rotateRight() {
+        const copyOfShape = this.shape.map(elt => elt.map(x => x))
+        for (let i = 0; i < this.shape.length; i ++) {
+            for (let j = 0; j < this.shape.length; j++) {
+                copyOfShape[j][this.shape.length - 1 - i] = this.shape[i][j]
+            }
+        }
+        const stringRepOfRotatedShape = this.matrixToString(copyOfShape)
+        return new RotatingShape(stringRepOfRotatedShape)
+    }
     rotateLeft() {
         return this.rotateRight().rotateRight().rotateRight()
     }
