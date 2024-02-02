@@ -38,5 +38,10 @@ export const Tetromino = {
         IIII.
         .....
         .....`, 2
+    ),
+    O_SHAPE: new RotatingTetromino(
+        `.OO
+        .OO
+        ...`, 1
     )
 }
