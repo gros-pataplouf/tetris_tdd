@@ -13,10 +13,14 @@ const RotatableComplex = Sup => class extends Sup {
             return this.matrixToString(rotationResult)
         })
     }
-    rotateRight() {
+    #rotate(direction) {
         const currentStringRepr = this.toString()
         const currentRotationIndex = this.variants.indexOf(currentStringRepr)
-        const rotatedStringRepr = this.variants[(currentRotationIndex + 1) % this.variants.length ]
+        return this.variants[(currentRotationIndex + direction) % this.variants.length ]
+
+    }
+    rotateRight() {
+        const rotatedStringRepr = this.rotate(1)
         return new RotatingTetromino(rotatedStringRepr, this.orientations, this.variants)
     }
     rotateLeft() {
