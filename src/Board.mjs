@@ -47,6 +47,15 @@ export class Board {
     this.fallingShape = {block, x: offset, y: 0}
   }
   canFall() {
+    const {block, x, y} = this.fallingShape;
+    for (let rowIndex in block.shape) {
+      for (let eltIndex in block.shape[rowIndex]) {
+        if (block.shape[rowIndex][eltIndex] !== '.') {
+          if (!this.board[parseInt(rowIndex) + y]) {
+            return false
+            console.log(block.shape[rowIndex][eltIndex], parseInt(rowIndex), y, this.board[parseInt(rowIndex) + y + 1])
+          }
+        }}}
     return true
   }
   tick() {
