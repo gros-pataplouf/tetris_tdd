@@ -50,12 +50,12 @@ export class Board {
       return false
     }
     const {block, x, y} = this.fallingShape;
-    for (let rowIndex = block.shape.length - 1; rowIndex >= 0; rowIndex--) {
-      for (let eltIndex = block.shape[rowIndex].length - 1; eltIndex >= 0; eltIndex--) {
+    for (let rowIndex = block.width - 1; rowIndex >= 0; rowIndex--) {
+      for (let colIndex = block.height - 1; colIndex >= 0; colIndex--) {
         if (
-          block.shape[rowIndex][eltIndex] !== '.'
-          && (!block.shape[rowIndex + 1] || block.shape[rowIndex + 1][eltIndex] === '.')
-          && (!this.board[y+rowIndex+1] || this.board[y+rowIndex+1][eltIndex + x] !== '.')
+          block.shape[rowIndex][colIndex] !== '.'
+          && (!block.shape[rowIndex + 1] || block.shape[rowIndex + 1][colIndex] === '.')
+          && (!this.board[y+rowIndex+1] || this.board[y+rowIndex+1][colIndex + x] !== '.')
           ) {
           delete this.fallingShape
           return false
