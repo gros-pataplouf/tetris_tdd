@@ -45,6 +45,12 @@ export class Board {
     }
     this.fallingShape = {block, x: offset, y: 0}
   }
+  currentCellCannotFall(rowIndex, colIndex) {
+    const {block, x, y} = this.fallingShape;
+    return (block.shape[rowIndex][colIndex] !== '.'
+    && (!block.shape[rowIndex + 1] || block.shape[rowIndex + 1][colIndex] === '.')
+    && (!this.board[y+rowIndex+1] || this.board[y+rowIndex+1][colIndex + x] !== '.'))
+  }
   canFall() {
     if (!this.hasFalling()) {
       return false
@@ -53,11 +59,7 @@ export class Board {
     this.nextBoard = this.board.map(row => row.map(elt => elt))
     for (let rowIndex = block.width - 1; rowIndex >= 0; rowIndex--) {
       for (let colIndex = block.height - 1; colIndex >= 0; colIndex--) {
-        if (
-          block.shape[rowIndex][colIndex] !== '.'
-          && (!block.shape[rowIndex + 1] || block.shape[rowIndex + 1][colIndex] === '.')
-          && (!this.board[y+rowIndex+1] || this.board[y+rowIndex+1][colIndex + x] !== '.')
-          ) {
+        if (this.currentCellCannotFall(rowIndex, colIndex)) {
           delete this.fallingShape
           return false
         } else {
