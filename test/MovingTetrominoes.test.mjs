@@ -9,7 +9,7 @@ describe('falling tetrominoes', () => {
         board = new Board(10, 6)
         
     })
-    test.skip('a falling tetromino can be moved left', () => {
+    test('a falling tetromino can be moved left', () => {
         board.drop(Tetromino.T_SHAPE)
         board.moveLeft()
         expect(board.toString()).to.equalShape(
