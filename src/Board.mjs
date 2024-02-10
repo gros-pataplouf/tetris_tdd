@@ -48,13 +48,16 @@ export class Board {
   }
   canFall() {
     const {block, x, y} = this.fallingShape;
-    for (let rowIndex in block.shape) {
-      for (let eltIndex in block.shape[rowIndex]) {
-        if (block.shape[rowIndex][eltIndex] !== '.') {
-          if (!this.board[parseInt(rowIndex) + y]) {
-            return false
-            console.log(block.shape[rowIndex][eltIndex], parseInt(rowIndex), y, this.board[parseInt(rowIndex) + y + 1])
-          }
+    for (let rowIndex = block.shape.length - 1; rowIndex >= 0; rowIndex--) {
+      for (let eltIndex = block.shape[rowIndex].length - 1; eltIndex >= 0; eltIndex--) {
+        if (
+          block.shape[rowIndex][eltIndex] !== '.'
+          && block.shape[rowIndex + 1]
+          && (block.shape[rowIndex + 1][eltIndex] === '.' || !block.shape[rowIndex + 1])
+          && (!this.board[y+rowIndex+1] || this.board[y+rowIndex+1][eltIndex + x] !== '.')
+          ) {
+          this.#falling = false
+          return false
         }}}
     return true
   }
