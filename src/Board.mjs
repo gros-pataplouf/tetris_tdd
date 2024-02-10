@@ -55,7 +55,6 @@ export class Board {
           && (!block.shape[rowIndex + 1] || block.shape[rowIndex + 1][eltIndex] === '.')
           && (!this.board[y+rowIndex+1] || this.board[y+rowIndex+1][eltIndex + x] !== '.')
           ) {
-          console.log(this.toString())
           this.#falling = false
           return false
         }}}
@@ -67,16 +66,13 @@ export class Board {
       for (let i = y + block.shape.length - 1; i >= 0; i--) {
       for (let j = x + block.shape[0].length - 1; j >= 0; j--) {
         if (this.board[i][j] !== '.') {
-          if (this.board[i+1][j] === '.') {
             this.#falling = true
             this.board[i+1][j] = this.board[i][j]
             this.board[i][j] = '.'
           }
-        }
+        
       }
-    }}
-    if (this.#falling) {
-      this.fallingShape.y += 1      
     }
-  }
+    this.fallingShape.y += 1   
+    }}
 }
