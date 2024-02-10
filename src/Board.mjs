@@ -72,15 +72,7 @@ export class Board {
   }
   tick() {
     if (this.canFall()) {
-      const {block, x, y} = this.fallingShape;
-      for (let rowIndex = block.width - 1; rowIndex >= 0; rowIndex--) {
-      for (let colIndex = block.height - 1; colIndex >= 0; colIndex--) {
-        if (block.shape[rowIndex][colIndex] !== '.') {
-            this.board[rowIndex + y + 1][colIndex + x] = block.shape[rowIndex][colIndex]
-            this.board[rowIndex + y][colIndex + x] = '.'
-        }
-      }
-    }
+    this.board = this.nextBoard.map(row => row.map(elt => elt))
     this.fallingShape.y += 1   
     }}
 }
