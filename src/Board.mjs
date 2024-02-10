@@ -4,6 +4,7 @@ export class Board {
   width;
   height;
   fallingShape = null;
+  nextBoard = null;
 
   constructor(width, height) {
     this.width = width;
@@ -49,6 +50,7 @@ export class Board {
       return false
     }
     const {block, x, y} = this.fallingShape;
+    this.nextBoard = this.board.map(row => row.map(elt => elt))
     for (let rowIndex = block.width - 1; rowIndex >= 0; rowIndex--) {
       for (let colIndex = block.height - 1; colIndex >= 0; colIndex--) {
         if (
@@ -57,8 +59,15 @@ export class Board {
           && (!this.board[y+rowIndex+1] || this.board[y+rowIndex+1][colIndex + x] !== '.')
           ) {
           delete this.fallingShape
+          delete this.nextBoard
           return false
-        }}}
+        } else {
+          if (block.shape[rowIndex][colIndex] !== '.') {
+            this.nextBoard[rowIndex + y + 1][colIndex + x] = block.shape[rowIndex][colIndex]
+            this.nextBoard[rowIndex + y][colIndex + x] = '.'
+        }
+        }
+      }}
     return true
   }
   tick() {
