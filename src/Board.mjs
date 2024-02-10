@@ -51,27 +51,27 @@ export class Board {
     && (!block.shape[rowIndex + 1] || block.shape[rowIndex + 1][colIndex] === '.')
     && (!this.board[y+rowIndex+1] || this.board[y+rowIndex+1][colIndex + x] !== '.'))
   }
-  updateNextBoard(rowIndex, colIndex) {
+  moveCellOnNextBoard(rowIndex, colIndex) {
     const {block, x, y} = this.fallingShape;
-    this.nextBoard[rowIndex + y + 1][colIndex + x] = block.shape[rowIndex][colIndex]
-    this.nextBoard[rowIndex + y][colIndex + x] = '.'
+    if (block.shape[rowIndex][colIndex] !== '.') {
+      const {block, x, y} = this.fallingShape;
+      this.nextBoard[rowIndex + y + 1][colIndex + x] = block.shape[rowIndex][colIndex]
+      this.nextBoard[rowIndex + y][colIndex + x] = '.'
+    }
   } 
   boardCanFall() {
     if (!this.hasFalling()) {
       return false
     }
     const {block, x, y} = this.fallingShape;
-    this.nextBoard = this.board.map(row => row.map(elt => elt))
+    this.nextBoard = this.board.map(row => row.map(elt => elt)) // work on a copy while looking at next board, so current board can be overwritten without further looping
     for (let rowIndex = block.height - 1; rowIndex >= 0; rowIndex--) {
       for (let colIndex = block.width - 1; colIndex >= 0; colIndex--) {
         if (this.currentCellCanFall(rowIndex, colIndex)) {
-
-          if (block.shape[rowIndex][colIndex] !== '.') {
-            this.updateNextBoard(rowIndex, colIndex)
-
-        }
+            this.moveCellOnNextBoard(rowIndex, colIndex)
         } else {
           delete this.fallingShape
+          delete this.nextBoard
           return false
         }
       }}
