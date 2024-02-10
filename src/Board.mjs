@@ -52,10 +52,10 @@ export class Board {
       for (let eltIndex = block.shape[rowIndex].length - 1; eltIndex >= 0; eltIndex--) {
         if (
           block.shape[rowIndex][eltIndex] !== '.'
-          && block.shape[rowIndex + 1]
-          && (block.shape[rowIndex + 1][eltIndex] === '.' || !block.shape[rowIndex + 1])
+          && (!block.shape[rowIndex + 1] || block.shape[rowIndex + 1][eltIndex] === '.')
           && (!this.board[y+rowIndex+1] || this.board[y+rowIndex+1][eltIndex + x] !== '.')
           ) {
+          console.log(this.toString())
           this.#falling = false
           return false
         }}}
