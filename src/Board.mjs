@@ -59,7 +59,6 @@ export class Board {
           && (!this.board[y+rowIndex+1] || this.board[y+rowIndex+1][colIndex + x] !== '.')
           ) {
           delete this.fallingShape
-          delete this.nextBoard
           return false
         } else {
           if (block.shape[rowIndex][colIndex] !== '.') {
