@@ -45,7 +45,7 @@ export class Board {
     this.fallingShape = {block, x: offset, y: 0}
   }
   canFall() {
-    if (!this.fallingShape) {
+    if (!this.hasFalling()) {
       return false
     }
     const {block, x, y} = this.fallingShape;
