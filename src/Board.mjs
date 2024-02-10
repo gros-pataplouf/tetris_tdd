@@ -63,8 +63,9 @@ export class Board {
   }
   tick() {
     if (this.canFall()) {
-      for (let i = this.height - 1; i >= 0; i--) {
-      for (let j = this.width - 1; j >= 0; j--) {
+      const {block, x, y} = this.fallingShape;
+      for (let i = y + block.shape.length - 1; i >= 0; i--) {
+      for (let j = x + block.shape[0].length - 1; j >= 0; j--) {
         if (this.board[i][j] !== '.') {
           if (i+1 < this.height && this.board[i+1][j] === '.') {
             this.#falling = true
