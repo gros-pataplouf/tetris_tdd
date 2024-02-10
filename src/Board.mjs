@@ -59,7 +59,7 @@ export class Board {
       this.nextBoard[rowIndex + y][colIndex + x] = '.'
     }
   } 
-  boardCanFall() {
+  boardCanFall(dirX, dirY) {
     if (!this.hasFalling()) {
       return false
     }
@@ -67,8 +67,8 @@ export class Board {
     this.nextBoard = this.board.map(row => row.map(elt => elt)) // work on a copy while looking at next board, so current board can be overwritten without further looping
     for (let rowIndex = block.height - 1; rowIndex >= 0; rowIndex--) {
       for (let colIndex = block.width - 1; colIndex >= 0; colIndex--) {
-        if (this.currentCellCanFall(rowIndex, colIndex)) {
-            this.moveCellOnNextBoard(rowIndex, colIndex)
+        if (this.currentCellCanFall(rowIndex, colIndex, dirX, dirY)) {
+            this.moveCellOnNextBoard(rowIndex, colIndex, dirX, dirY)
         } else {
           delete this.fallingShape
           delete this.nextBoard
@@ -82,7 +82,7 @@ export class Board {
     this.fallingShape.y += 1   
   }
   tick() {
-    if (this.boardCanFall()) {
+    if (this.boardCanFall(0,1)) {
       this.fall()
     }}
 }
