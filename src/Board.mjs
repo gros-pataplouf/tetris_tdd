@@ -32,11 +32,10 @@ export class Board {
   }
 
   drop(input) {
-    const boardMiddle = Math.floor(this.width / 2)
-    const block = this.shapeFormatter(input)
-    if (this.board[0][boardMiddle] !== '.') {
+    if (this.hasFalling()) {
       throw new Error('already falling')
     }
+    const block = this.shapeFormatter(input)
     const offset = Math.floor((this.width - block.width)/2)
     for (let i = 0; i < block.height; i++) {
       for (let j = offset; j - offset < block.width; j++) {
@@ -67,8 +66,8 @@ export class Board {
       const {block, x, y} = this.fallingShape;
       for (let rowIndex = block.width - 1; rowIndex >= 0; rowIndex--) {
       for (let colIndex = block.height - 1; colIndex >= 0; colIndex--) {
-        if (this.board[rowIndex + y][colIndex + x] !== '.') {
-            this.board[rowIndex + y + 1][colIndex + x] = this.board[rowIndex + y][colIndex + x]
+        if (block.shape[rowIndex][colIndex] !== '.') {
+            this.board[rowIndex + y + 1][colIndex + x] = block.shape[rowIndex][colIndex]
             this.board[rowIndex + y][colIndex + x] = '.'
         }
       }
