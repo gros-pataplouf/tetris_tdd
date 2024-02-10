@@ -65,13 +65,12 @@ export class Board {
   tick() {
     if (this.canFall()) {
       const {block, x, y} = this.fallingShape;
-      for (let i = y + block.shape.length - 1; i >= 0; i--) {
-      for (let j = x + block.shape[0].length - 1; j >= 0; j--) {
-        if (this.board[i][j] !== '.') {
-            this.board[i+1][j] = this.board[i][j]
-            this.board[i][j] = '.'
-          }
-        
+      for (let rowIndex = y + block.width - 1; rowIndex >= 0; rowIndex--) {
+      for (let colIndex = x + block.height - 1; colIndex >= 0; colIndex--) {
+        if (this.board[rowIndex][colIndex] !== '.') {
+            this.board[rowIndex+1][colIndex] = this.board[rowIndex][colIndex]
+            this.board[rowIndex][colIndex] = '.'
+        }
       }
     }
     this.fallingShape.y += 1   
