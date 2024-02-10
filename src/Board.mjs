@@ -65,11 +65,11 @@ export class Board {
   tick() {
     if (this.canFall()) {
       const {block, x, y} = this.fallingShape;
-      for (let rowIndex = y + block.width - 1; rowIndex >= 0; rowIndex--) {
-      for (let colIndex = x + block.height - 1; colIndex >= 0; colIndex--) {
-        if (this.board[rowIndex][colIndex] !== '.') {
-            this.board[rowIndex+1][colIndex] = this.board[rowIndex][colIndex]
-            this.board[rowIndex][colIndex] = '.'
+      for (let rowIndex = block.width - 1; rowIndex >= 0; rowIndex--) {
+      for (let colIndex = block.height - 1; colIndex >= 0; colIndex--) {
+        if (this.board[rowIndex + y][colIndex + x] !== '.') {
+            this.board[rowIndex + y + 1][colIndex + x] = this.board[rowIndex + y][colIndex + x]
+            this.board[rowIndex + y][colIndex + x] = '.'
         }
       }
     }
