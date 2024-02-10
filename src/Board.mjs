@@ -48,14 +48,14 @@ export class Board {
   currentCellCanMove(rowIndex, colIndex, dirX, dirY) {
     const {block, x, y} = this.fallingShape;
     return !(block.shape[rowIndex][colIndex] !== '.'
-    && (!block.shape[rowIndex + 1] || block.shape[rowIndex + 1][colIndex] === '.')
-    && (!this.board[y+rowIndex+1] || this.board[y+rowIndex+1][colIndex + x] !== '.'))
+    && (!block.shape[rowIndex + dirY] || block.shape[rowIndex + dirY][colIndex] === '.')
+    && (!this.board[y+rowIndex+dirY] || this.board[y+rowIndex+dirY][colIndex + x] !== '.'))
   }
   moveCellOnNextBoard(rowIndex, colIndex, dirX, dirY) {
     const {block, x, y} = this.fallingShape;
     if (block.shape[rowIndex][colIndex] !== '.') {
       const {block, x, y} = this.fallingShape;
-      this.nextBoard[rowIndex + y + 1][colIndex + x] = block.shape[rowIndex][colIndex]
+      this.nextBoard[rowIndex + y + dirY][colIndex + x] = block.shape[rowIndex][colIndex]
       this.nextBoard[rowIndex + y][colIndex + x] = '.'
     }
   } 
@@ -79,7 +79,8 @@ export class Board {
   }
   move(dirX, dirY) {
     this.board = this.nextBoard.map(row => row.map(elt => elt))
-    this.fallingShape.y += 1   
+    this.fallingShape.y += dirY
+    this.fallingShape.x += dirX   
   }
   tick() {
     if (this.boardCanMove(0,1)) {
