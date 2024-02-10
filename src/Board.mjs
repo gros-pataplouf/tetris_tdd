@@ -21,7 +21,7 @@ export class Board {
   }
 
   hasFalling() {
-    return this.fallingShape ? true: false
+    return this.fallingShape ? true : false
   }
   shapeFormatter(shape) {
     if (shape instanceof Shape) {
@@ -69,9 +69,12 @@ export class Board {
       }}
     return true
   }
-  tick() {
-    if (this.canFall()) {
+  fall() {
     this.board = this.nextBoard.map(row => row.map(elt => elt))
     this.fallingShape.y += 1   
+  }
+  tick() {
+    if (this.canFall()) {
+      this.fall()
     }}
 }
