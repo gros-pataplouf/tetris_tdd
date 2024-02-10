@@ -3,7 +3,6 @@ import { Shape } from "./Shape.mjs";
 export class Board {
   width;
   height;
-  #falling = false;
   fallingShape = null;
 
   constructor(width, height) {
@@ -21,7 +20,7 @@ export class Board {
   }
 
   hasFalling() {
-    return this.#falling
+    return this.fallingShape ? true: false
   }
   shapeFormatter(shape) {
     if (shape instanceof Shape) {
@@ -47,6 +46,9 @@ export class Board {
     this.fallingShape = {block, x: offset, y: 0}
   }
   canFall() {
+    if (!this.fallingShape) {
+      return false
+    }
     const {block, x, y} = this.fallingShape;
     for (let rowIndex = block.shape.length - 1; rowIndex >= 0; rowIndex--) {
       for (let eltIndex = block.shape[rowIndex].length - 1; eltIndex >= 0; eltIndex--) {
@@ -55,7 +57,7 @@ export class Board {
           && (!block.shape[rowIndex + 1] || block.shape[rowIndex + 1][eltIndex] === '.')
           && (!this.board[y+rowIndex+1] || this.board[y+rowIndex+1][eltIndex + x] !== '.')
           ) {
-          this.#falling = false
+          delete this.fallingShape
           return false
         }}}
     return true
@@ -66,7 +68,6 @@ export class Board {
       for (let i = y + block.shape.length - 1; i >= 0; i--) {
       for (let j = x + block.shape[0].length - 1; j >= 0; j--) {
         if (this.board[i][j] !== '.') {
-            this.#falling = true
             this.board[i+1][j] = this.board[i][j]
             this.board[i][j] = '.'
           }
