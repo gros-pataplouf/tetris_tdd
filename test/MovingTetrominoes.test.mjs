@@ -126,6 +126,40 @@ describe('moving tetrominoes are stopped by other blocks', () => {
              OO........`
           );
     })
+    test('it cannot be moved right through other blocks', () => {
+        for (let i = 0; i < 3; i++) {
+            board.drop(Tetromino.O_SHAPE)
+            moveToRightUntilStops(board)
+            fallToBottom(board)
+        }
+        board.drop(Tetromino.T_SHAPE)
+        moveToRightUntilStops(board)
+        expect(board.toString()).to.equalShape(
+            `......T.OO
+             .....TTTOO
+             ........OO
+             ........OO
+             ........OO
+             ........OO`
+          );
+    })
+    test('it cannot be moved down through other blocks (will stop falling)', () => {
+        board.drop(Tetromino.I_SHAPE)
+        fallToBottom(board)
+        board.drop(Tetromino.T_SHAPE)
+        fallToBottom(board)
+        board.moveDown()
+        board.drop(Tetromino.O_SHAPE)
+        board.moveDown()
+        expect(board.toString()).to.equalShape(
+            `..........
+             ....OO....
+             ....OO....
+             ....T.....
+             ...TTT....
+             ..IIII....`
+          );
+    })
 })
 
 
@@ -135,7 +169,7 @@ describe('moving tetrominoes are stopped by other blocks', () => {
  - it cannot be moved left beyond the board OK
  - it cannot be moved right beyond the board OK
  - it cannot be moved down beyond the board (will stop falling) OK
- - it cannot be moved left through other blocks
- - it cannot be moved right through other blocks
+ - it cannot be moved left through other blocks OK
+ - it cannot be moved right through other blocks OK
  - it cannot be moved down through other blocks (will stop falling)
 */

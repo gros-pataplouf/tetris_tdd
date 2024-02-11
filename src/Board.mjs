@@ -40,7 +40,9 @@ export class Board {
     const offset = Math.floor((this.width - block.width)/2)
     for (let i = 0; i < block.height; i++) {
       for (let j = offset; j - offset < block.width; j++) {
-        this.board[i][j] = block.shape[i][j-offset]
+        if (block.shape[i][j] !== '.') {
+          this.board[i][j] = block.shape[i][j-offset]
+        }
       }
     }
     this.fallingShape = {block, x: offset, y: 0}
