@@ -92,4 +92,10 @@ export class Board {
       this.move(-1, 0)
     }
   }
+  moveRight() {
+    if (this.boardCanMove(1, 0)) {
+      this.move(1, 0)
+    }
+  }
+
 }

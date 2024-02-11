@@ -21,10 +21,24 @@ describe('falling tetrominoes', () => {
              ..........`
           );
     })
+
+    test('a falling tetromino can be moved right', () => {
+        board.drop(Tetromino.T_SHAPE)
+        board.tick()
+        board.moveRight()
+        expect(board.toString()).to.equalShape(
+            `..........
+             .....T....
+             ....TTT...
+             ..........
+             ..........
+             ..........`
+          );
+    })
 })
 
 
-/* - a falling tetromino can be moved left
+/* - a falling tetromino can be moved left OK
  - a falling tetromino can be moved right
  - a falling tetromino can be moved down
  - it cannot be moved left beyond the board
