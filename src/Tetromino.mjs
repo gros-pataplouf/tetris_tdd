@@ -46,5 +46,13 @@ export const Tetromino = {
         `.OO
         .OO
         ...`, 1
-    )
-}
+    ),
+    L_SHAPE : new RotatingTetromino(
+        `..L
+        LLL
+        ...`),
+    Z_SHAPE : new RotatingTetromino(
+            `ZZ.
+            .ZZ
+            ...`)
+    }

@@ -160,6 +160,31 @@ describe('moving tetrominoes are stopped by other blocks', () => {
              ..IIII....`
           );
     })
+    test('a complex scenario with I, T, O, L, Z-Shape', () => {
+        board.drop(Tetromino.O_SHAPE)
+        moveToLeftUntilStops(board)
+        fallToBottom(board)
+        board.drop(Tetromino.I_SHAPE)
+        moveToRightUntilStops(board)
+        fallToBottom(board)
+        board.drop(Tetromino.T_SHAPE)
+        fallToBottom(board)
+        board.drop(Tetromino.L_SHAPE)
+        board.moveLeft()
+        fallToBottom(board)
+        board.drop(Tetromino.Z_SHAPE)
+        board.moveRight()
+        fallToBottom(board)
+        expect(board.toString()).to.equalShape(
+            `..........
+            ....ZZ....
+            ....LZZ...
+            ..LLL.....
+            OO..T.....
+            OO.TTTIIII`
+          );
+    })
+
 })
 
 
