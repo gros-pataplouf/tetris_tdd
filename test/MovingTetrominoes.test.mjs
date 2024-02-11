@@ -56,7 +56,7 @@ describe('falling tetrominoes', () => {
         board.tick()
         board.moveRight()
         board.moveDown()
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 10; i++) {
             board.moveLeft()
         }
         expect(board.toString()).to.equalShape(
@@ -68,6 +68,24 @@ describe('falling tetrominoes', () => {
              ..........`
           );
     })
+    test('it cannot be moved right beyond the board', () => {
+        board.drop(Tetromino.T_SHAPE)
+        board.tick()
+        board.moveRight()
+        board.moveDown()
+        for (let i = 0; i < 10; i++) {
+            board.moveRight()
+        }
+        expect(board.toString()).to.equalShape(
+            `..........
+             ..........
+             ........T.
+             .......TTT
+             ..........
+             ..........`
+          );
+    })
+
 })
 
 
