@@ -85,14 +85,29 @@ describe('falling tetrominoes', () => {
              ..........`
           );
     })
+    test('it cannot be moved down beyond the board', () => {
+        board.drop(Tetromino.O_SHAPE)
+        for (let i = 0; i < 10; i++) {
+            board.moveDown()
+        }
+        expect(board.toString()).to.equalShape(
+            `..........
+             ..........
+             ..........
+             ..........
+             ....OO....
+             ....OO....`
+          );
+        expect(board.hasFalling()).to.be.false
+    })
 
 })
 
 
 /* - a falling tetromino can be moved left OK
- - a falling tetromino can be moved right
- - a falling tetromino can be moved down
- - it cannot be moved left beyond the board
+ - a falling tetromino can be moved right OK
+ - a falling tetromino can be moved down OK
+ - it cannot be moved left beyond the board OK
  - it cannot be moved right beyond the board
  - it cannot be moved down beyond the board (will stop falling)
  - it cannot be moved left through other blocks
