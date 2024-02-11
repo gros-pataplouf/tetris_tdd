@@ -77,7 +77,9 @@ export class Board {
         if (this.currentCellCanMove(rowIndex, colIndex, dirX, dirY)) {
             this.moveCellOnNextBoard(rowIndex, colIndex, dirX, dirY)
         } else {
-          delete this.fallingShape
+          if (dirX === 0) {
+            delete this.fallingShape
+          }
           delete this.nextBoard
           return false
         }

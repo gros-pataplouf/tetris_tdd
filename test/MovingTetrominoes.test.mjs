@@ -2,8 +2,9 @@ import { beforeEach, describe, test } from "vitest"
 import { expect } from "chai"
 import { Board } from "../src/Board.mjs"
 import { Tetromino } from "../src/Tetromino.mjs"
+import { fallToBottom, moveDownUntilStops, moveToLeftUntilStops, moveToRightUntilStops } from "./testHelpers.mjs"
 
-describe('falling tetrominoes', () => {
+describe('falling tetrominoes can be moved', () => {
     let board
     beforeEach(() => {
         board = new Board(10, 6)
@@ -100,7 +101,31 @@ describe('falling tetrominoes', () => {
           );
         expect(board.hasFalling()).to.be.false
     })
+})
 
+describe('moving tetrominoes are stopped by other blocks', () => {
+    let board
+    beforeEach(() => {
+        board = new Board(10, 6)
+        
+    })
+    test('it cannot be moved left through other blocks', () => {
+        for (let i = 0; i < 3; i++) {
+            board.drop(Tetromino.O_SHAPE)
+            moveToLeftUntilStops(board)
+            fallToBottom(board)
+        }
+        board.drop(Tetromino.T_SHAPE)
+        moveToLeftUntilStops(board)
+        expect(board.toString()).to.equalShape(
+            `OO.T......
+             OOTTT.....
+             OO........
+             OO........
+             OO........
+             OO........`
+          );
+    })
 })
 
 
@@ -108,8 +133,8 @@ describe('falling tetrominoes', () => {
  - a falling tetromino can be moved right OK
  - a falling tetromino can be moved down OK
  - it cannot be moved left beyond the board OK
- - it cannot be moved right beyond the board
- - it cannot be moved down beyond the board (will stop falling)
+ - it cannot be moved right beyond the board OK
+ - it cannot be moved down beyond the board (will stop falling) OK
  - it cannot be moved left through other blocks
  - it cannot be moved right through other blocks
  - it cannot be moved down through other blocks (will stop falling)
