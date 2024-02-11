@@ -37,15 +37,18 @@ export class Board {
       throw new Error('already falling')
     }
     const block = this.shapeFormatter(input)
-    const offset = Math.floor((this.width - block.width)/2)
-    for (let i = 0; i < block.height; i++) {
-      for (let j = offset; j - offset < block.width; j++) {
-        if (block.shape[i][j] !== '.') {
-          this.board[i][j] = block.shape[i][j-offset]
+    const numOfEmptyFirstRows = block.shape.map(row => row.some(elt => elt !== '.') ? "F" : "E").join('').split('F')[0].length
+    let offsetY = 0 - numOfEmptyFirstRows
+    const offsetX = Math.floor((this.width - block.width)/2)
+    for (let i = offsetY; i - offsetY < block.height; i++) {
+      if (i >= 0) {
+      for (let j = offsetX; j - offsetX < block.width; j++) {
+        if (block.shape[i][j] !== '.' && this.board[i][j] === '.') {
+          this.board[i][j] = block.shape[i - offsetY][j-offsetX]
         }
       }
-    }
-    this.fallingShape = {block, x: offset, y: 0}
+    }}
+    this.fallingShape = {block, x: offsetX, y: offsetY}
   }
   currentCellCanMove(rowIndex, colIndex, dirX, dirY) {
     const {block, x, y} = this.fallingShape;
