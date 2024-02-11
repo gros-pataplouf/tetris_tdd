@@ -97,5 +97,10 @@ export class Board {
       this.move(1, 0)
     }
   }
+  moveDown() {
+    if (this.boardCanMove(0, 1)) {
+      this.move(0, 1)
+    }
+  }
 
 }
