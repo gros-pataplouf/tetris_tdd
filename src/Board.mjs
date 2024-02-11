@@ -65,8 +65,9 @@ export class Board {
     }
     const {block, x, y} = this.fallingShape;
     this.nextBoard = this.board.map(row => row.map(elt => elt)) // work on a copy while looking at next board, so current board can be overwritten without further looping
+
     for (let rowIndex = block.height - 1; rowIndex >= 0; rowIndex--) {
-      for (let colIndex = 0; colIndex < block.width; colIndex++) {
+      for (let colIndex = dirX <= 0? 0: block.width; dirX <= 0? colIndex < block.width : colIndex >= 0; dirX <= 0? colIndex++ : colIndex--) {
         if (this.currentCellCanMove(rowIndex, colIndex, dirX, dirY)) {
             this.moveCellOnNextBoard(rowIndex, colIndex, dirX, dirY)
         } else {
