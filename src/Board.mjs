@@ -54,10 +54,11 @@ export class Board {
     const {block, x, y} = this.fallingShape;
     const cellIsFull = () => block.shape[rowIndex][colIndex] !== '.'
     const noFullCellAsNeighbourInDirection = () => !block.shape[rowIndex + dirY] || !block.shape[rowIndex + dirY][colIndex + dirX] || block.shape[rowIndex + dirY][colIndex + dirX] === '.'
+    const canMoveInDirection = (dirX, dirY) => this.board[y+rowIndex+dirY] && this.board[y+rowIndex+dirY][colIndex + x] === '.'
     if (dirX === 0) {
       return !(cellIsFull()
       && noFullCellAsNeighbourInDirection()
-      && (!this.board[y+rowIndex+dirY] || this.board[y+rowIndex+dirY][colIndex + x] !== '.'))
+      && !canMoveInDirection(dirX, dirY))
     } else {
       return !(cellIsFull()
       && noFullCellAsNeighbourInDirection()
