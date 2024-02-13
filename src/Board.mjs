@@ -52,12 +52,13 @@ export class Board {
   }
   currentCellCanMove(rowIndex, colIndex, dirX, dirY) {
     const {block, x, y} = this.fallingShape;
+    const cellIsFull = block.shape[rowIndex][colIndex] !== '.'
     if (dirX === 0) {
-      return !(block.shape[rowIndex][colIndex] !== '.'
+      return !(cellIsFull
       && (!block.shape[rowIndex + dirY] || block.shape[rowIndex + dirY][colIndex] === '.')
       && (!this.board[y+rowIndex+dirY] || this.board[y+rowIndex+dirY][colIndex + x] !== '.'))
     } else {
-      return !(block.shape[rowIndex][colIndex] !== '.'
+      return !(cellIsFull
       && (!block.shape[rowIndex][colIndex + dirX] || block.shape[rowIndex][colIndex + dirX] === '.')
       && (!this.board[y+rowIndex][x+colIndex+dirX] || this.board[y+rowIndex][colIndex + x + dirX] !== '.'))
     }
