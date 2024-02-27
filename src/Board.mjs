@@ -68,7 +68,7 @@ export class Board {
       this.nextBoard[rowIndex + y][colIndex + x] = '.'
     }
   } 
-  boardCanMove(dirX, dirY) {
+  shapeCanMove(dirX, dirY) {
     if (!this.hasFalling()) {
       return false
     }
@@ -95,21 +95,21 @@ export class Board {
     this.fallingShape.x += dirX   
   }
   tick() {
-    if (this.boardCanMove(0,1)) {
+    if (this.shapeCanMove(0,1)) {
       this.move(0,1)
     }}
   moveLeft() {
-    if (this.boardCanMove(-1, 0)) {
+    if (this.shapeCanMove(-1, 0)) {
       this.move(-1, 0)
     }
   }
   moveRight() {
-    if (this.boardCanMove(1, 0)) {
+    if (this.shapeCanMove(1, 0)) {
       this.move(1, 0)
     }
   }
   moveDown() {
-    if (this.boardCanMove(0, 1)) {
+    if (this.shapeCanMove(0, 1)) {
       this.move(0, 1)
     }
   }
