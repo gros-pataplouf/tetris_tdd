@@ -53,15 +53,14 @@ export class Board {
   currentCellCanMove(rowIndex, colIndex, dirX, dirY) {
     const {block, x, y} = this.fallingShape;
     const cellIsFull = () => block.shape[rowIndex][colIndex] !== '.'
-    const noFullCellAsNeighbourInDirection = () => !block.shape[rowIndex + dirY] || !block.shape[rowIndex + dirY][colIndex + dirX] || block.shape[rowIndex + dirY][colIndex + dirX] === '.'
+    const isBorderCell = () => !block.shape[rowIndex + dirY] || !block.shape[rowIndex + dirY][colIndex + dirX] || block.shape[rowIndex + dirY][colIndex + dirX] === '.'
     const canMoveInDirection = (dirX, dirY) => this.board[y+rowIndex+dirY] && this.board[y+rowIndex+dirY][colIndex + x] === '.'
-    if (dirX === 0) {
-      return !(cellIsFull()
-      && noFullCellAsNeighbourInDirection()
-      && !canMoveInDirection(dirX, dirY))
+    if (dirX === 0 && cellIsFull()
+    && isBorderCell()) {
+      return !(!canMoveInDirection(dirX, dirY))
     } else {
       return !(cellIsFull()
-      && noFullCellAsNeighbourInDirection()
+      && isBorderCell()
       && (!this.board[y+rowIndex + dirY][x+colIndex+dirX] || this.board[y+rowIndex][colIndex + x + dirX] !== '.'))
     }
   }
