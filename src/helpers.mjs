@@ -7,3 +7,8 @@ export function rotateMatrix(sourceMatrix) {
     }
     return targetMatrix
 }
+
+
+export function reverseLoopWrapper(height, width, dirX, fn) {
+    return null
+}
