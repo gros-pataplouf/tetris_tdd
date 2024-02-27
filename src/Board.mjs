@@ -54,18 +54,18 @@ export class Board {
     const {block, x, y} = this.fallingShape;
     const cellIsFull = () => block.shape[rowIndex][colIndex] !== '.'
     const isBorderCell = () => !block.shape[rowIndex + dirY] || !block.shape[rowIndex + dirY][colIndex + dirX] || block.shape[rowIndex + dirY][colIndex + dirX] === '.'
-    const canMoveInDirection = (dirX, dirY) => dirX === 0 
+    const canMoveInDirection = (dirX, dirY) => dirY !== 0 
     ?
     this.board[y+rowIndex+dirY] && this.board[y+rowIndex+dirY][colIndex + x] === '.'
     :
-    !this.board[y+rowIndex + dirY][x+colIndex+dirX] || this.board[y+rowIndex][colIndex + x + dirX] !== '.'
+    this.board[y+rowIndex + dirY][x+colIndex+dirX] && this.board[y+rowIndex][colIndex + x + dirX] === '.'
 
     if (dirX === 0 && cellIsFull() && isBorderCell()) {
       return canMoveInDirection(dirX, dirY)
     } else {
       return !(cellIsFull()
       && isBorderCell()
-      && canMoveInDirection(dirX, dirY))
+      && !canMoveInDirection(dirX, dirY))
     }
   }
   moveCellOnNextBoard(rowIndex, colIndex, dirX, dirY) {
