@@ -56,7 +56,7 @@ export class Board {
     const isBorderCell = () => !block.shape[rowIndex + dirY] || !block.shape[rowIndex + dirY][colIndex + dirX] || block.shape[rowIndex + dirY][colIndex + dirX] === '.'
     const canMoveInDirection = (dirX, dirY) => dirY !== 0 
     ?
-    this.board[y+rowIndex+dirY] && this.board[y+rowIndex+dirY][colIndex + x] === '.'
+    this.board[y+rowIndex+dirY] && this.board[y+rowIndex+dirY][colIndex + x + dirX] === '.'
     :
     this.board[y+rowIndex + dirY][x+colIndex+dirX] && this.board[y+rowIndex][colIndex + x + dirX] === '.'
 
