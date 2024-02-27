@@ -23,20 +23,19 @@ export class Board {
   hasFalling() {
     return this.fallingShape ? true : false
   }
-  shapeFormatter(shape) {
+
+  formatShape(shape) {
     if (shape instanceof Shape) {
       return shape
-    } else {
-      const newShape = new Shape(shape)
-      return newShape
     }
+    return new Shape(shape)
   }
 
   drop(input) {
     if (this.hasFalling()) {
       throw new Error('already falling')
     }
-    const block = this.shapeFormatter(input)
+    const block = this.formatShape(input)
     const numOfEmptyFirstRows = block.shape.map(row => row.some(elt => elt !== '.') ? "F" : "E").join('').split('F')[0].length
     let offsetY = 0 - numOfEmptyFirstRows
     const offsetX = Math.floor((this.width - block.width)/2)
