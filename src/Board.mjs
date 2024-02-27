@@ -78,14 +78,14 @@ export class Board {
         if (this.currentCellCanMove(rowIndex, colIndex, dirX, dirY)) {
             this.moveCellOnNextBoard(rowIndex, colIndex, dirX, dirY)
         } else {
-          this.stopFalling(dirX)
+          this.stopFalling(dirX, dirY)
           return false
         }
       }}
     return true
   }
 
-  stopFalling(dirX) {
+  stopFalling(dirX, dirY) {
     if (dirX === 0) {
       delete this.fallingShape
     }
@@ -100,6 +100,8 @@ export class Board {
   tick() {
     if (this.shapeCanMove(0,1)) {
       this.move(0,1)
+    } else {
+      this.stopFalling(0, 1)
     }}
   moveLeft() {
     if (this.shapeCanMove(-1, 0)) {
@@ -114,6 +116,8 @@ export class Board {
   moveDown() {
     if (this.shapeCanMove(0, 1)) {
       this.move(0, 1)
+    } else {
+      this.stopFalling(0, 1)
     }
   }
 }
