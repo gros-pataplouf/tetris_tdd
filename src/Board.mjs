@@ -84,11 +84,8 @@ export class Board {
     return true
   }
 
-  stopFalling(dirX, dirY) {
-    if (dirX === 0) {
+  stopFalling() {
       delete this.fallingShape
-    }
-    delete this.nextBoard
   }
 
   move(dirX, dirY) {
@@ -100,7 +97,7 @@ export class Board {
     if (this.shapeCanMove(0,1)) {
       this.move(0,1)
     } else {
-      this.stopFalling(0, 1)
+      this.stopFalling()
     }}
   moveLeft() {
     if (this.shapeCanMove(-1, 0)) {
@@ -116,7 +113,7 @@ export class Board {
     if (this.shapeCanMove(0, 1)) {
       this.move(0, 1)
     } else {
-      this.stopFalling(0, 1)
+      this.stopFalling()
     }
   }
 }
