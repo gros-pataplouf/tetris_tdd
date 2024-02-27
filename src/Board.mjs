@@ -78,7 +78,6 @@ export class Board {
         if (this.currentCellCanMove(rowIndex, colIndex, dirX, dirY)) {
             this.moveCellOnNextBoard(rowIndex, colIndex, dirX, dirY)
         } else {
-          this.stopFalling(dirX, dirY)
           return false
         }
       }}
