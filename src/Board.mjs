@@ -80,15 +80,20 @@ export class Board {
         if (this.currentCellCanMove(rowIndex, colIndex, dirX, dirY)) {
             this.moveCellOnNextBoard(rowIndex, colIndex, dirX, dirY)
         } else {
-          if (dirX === 0) {
-            delete this.fallingShape
-          }
-          delete this.nextBoard
+          this.stopFalling(dirX)
           return false
         }
       }}
     return true
   }
+
+  stopFalling(dirX) {
+    if (dirX === 0) {
+      delete this.fallingShape
+    }
+    delete this.nextBoard
+  }
+
   move(dirX, dirY) {
     this.board = this.nextBoard.map(row => row.map(elt => elt))
     this.fallingShape.y += dirY
