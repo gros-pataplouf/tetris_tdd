@@ -8,7 +8,7 @@ const RotatableComplex = Sup => class extends Sup {
         this.variants = variants || Array(this.orientations).fill("").map((elt, index) => {
             let rotationResult = this.shape
             for (let i = 0; i < index; i++) {
-                rotationResult = rotateMatrix(rotationResult)                  
+                rotationResult = this.rotateMatrix(rotationResult)                  
             }
             return this.matrixToString(rotationResult)
         })
