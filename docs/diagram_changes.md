@@ -5,10 +5,10 @@ title: Tetris
 
  
 classDiagram
-    note "rotateMatrix helper method should be attached to matrix"
     Matrix ..|> Shape
     Matrix ..|> Board
     Matrix: +matrixToString(input=this)
+    Matrix: +rotateMatrix(input=this)
     Shape --|> Tetromino
     RotatableComplex --|> Tetromino
     Shape --|> RotatingShape

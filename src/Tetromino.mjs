@@ -1,5 +1,4 @@
 import { Shape } from "./Shape.mjs"
-import { rotateMatrix } from "./helpers.mjs"
 
 const RotatableComplex = Sup => class extends Sup {
     constructor(shape, orientations = 4, variants = null) {
