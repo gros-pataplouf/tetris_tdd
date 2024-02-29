@@ -28,15 +28,21 @@ export class Board extends Matrix {
     }
     return new Shape(input)
   }
+  #setShapeOffset(block) {
+    const numOfEmptyFirstRows = block.shape.map(row => row.some(elt => elt !== '.') ? "F" : "E").join('').split('F')[0].length
+    let offsetY = 0 - numOfEmptyFirstRows
+    const offsetX = Math.floor((this.width - block.width)/2)
+    this.#fallingShape.x = offsetX
+    this.#fallingShape.y = offsetY
+    return [offsetX, offsetY]
+  }
 
   drop(input) {
     if (this.hasFalling()) {
       throw new Error('already falling')
     }
     const block = this.#formatShape(input)
-    const numOfEmptyFirstRows = block.shape.map(row => row.some(elt => elt !== '.') ? "F" : "E").join('').split('F')[0].length
-    let offsetY = 0 - numOfEmptyFirstRows
-    const offsetX = Math.floor((this.width - block.width)/2)
+    const [offsetX, offsetY] = this.#setShapeOffset(block)
     for (let i = offsetY; i - offsetY < block.height; i++) {
       if (i >= 0) {
       for (let j = offsetX; j - offsetX < block.width; j++) {
@@ -45,7 +51,6 @@ export class Board extends Matrix {
         }
       }
     }}
-    this.#fallingShape = {block, x: offsetX, y: offsetY}
   }
   currentCellCanMove(rowIndex, colIndex, dirX, dirY) {
     const {block, x, y} = this.#fallingShape;
