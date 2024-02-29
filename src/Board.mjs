@@ -8,7 +8,7 @@ export class Board extends Matrix {
   nextBoard = null;
 
   constructor(width, height) {
-    super()
+    super();
     this.width = width;
     this.height = height;
     this.board = Array(height).fill('.').map(elt => Array.from('.'.repeat(width)))
@@ -22,11 +22,11 @@ export class Board extends Matrix {
     return this.fallingShape ? true : false
   }
 
-  formatShape(shape) {
-    if (shape instanceof Shape) {
-      return shape
+  formatShape(input) {
+    if (input instanceof Shape) {
+      return input
     }
-    return new Shape(shape)
+    return new Shape(input)
   }
 
   drop(input) {
