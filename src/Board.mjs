@@ -32,8 +32,7 @@ export class Board extends Matrix {
     const numOfEmptyFirstRows = block.shape.map(row => row.some(elt => elt !== '.') ? "F" : "E").join('').split('F')[0].length
     let offsetY = 0 - numOfEmptyFirstRows
     const offsetX = Math.floor((this.width - block.width)/2)
-    this.#fallingShape.x = offsetX
-    this.#fallingShape.y = offsetY
+    this.#fallingShape = {block, x: offsetX, y: offsetY}
     return [offsetX, offsetY]
   }
 
