@@ -39,14 +39,7 @@ export class Board extends Matrix {
     const offsetX = this.#fallingShape.x
     const offsetY = this.#fallingShape.y
     const block = this.#fallingShape.block
-    for (let i = offsetY; i - offsetY < block.height; i++) {
-      if (i >= 0) {
-      for (let j = offsetX; j - offsetX < block.width; j++) {
-        if (block.shape[i] && block.shape[i][j] !== '.' && this.board[i][j] === '.') {
-          this.board[i][j] = block.shape[i - offsetY][j-offsetX]
-        }
-      }
-    }}
+    this.board = this.mergeMatrix(this.board, block.shape, offsetX, offsetY)
   }
 
   drop(input) {
