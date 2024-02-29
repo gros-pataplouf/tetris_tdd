@@ -42,7 +42,7 @@ export class Board extends Matrix {
     for (let i = offsetY; i - offsetY < block.height; i++) {
       if (i >= 0) {
       for (let j = offsetX; j - offsetX < block.width; j++) {
-        if (block.shape[i][j] !== '.' && this.board[i][j] === '.') {
+        if (block.shape[i] && block.shape[i][j] !== '.' && this.board[i][j] === '.') {
           this.board[i][j] = block.shape[i - offsetY][j-offsetX]
         }
       }
@@ -99,7 +99,8 @@ export class Board extends Matrix {
   #move(dirX, dirY) {
     this.board = this.nextBoard.map(row => row.map(elt => elt))
     this.#fallingShape.y += dirY
-    this.#fallingShape.x += dirX   
+    this.#fallingShape.x += dirX
+    this.#insertShape()   
   }
   tick() {
     if (this.shapeCanMove(0,1)) {
