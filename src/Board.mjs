@@ -15,6 +15,10 @@ export class Board extends Matrix {
   }
 
   toString() {
+    if (this.#fallingShape) {
+      const mergedMatrix = this.mergeMatrix(this.board, this.#fallingShape.block.shape, this.#fallingShape.x, this.#fallingShape.y)
+      return this.matrixToString(mergedMatrix)
+    }
     return this.matrixToString(this.board)
   }
 
@@ -36,10 +40,7 @@ export class Board extends Matrix {
     return [offsetX, offsetY]
   }
   #insertShape() {
-    const offsetX = this.#fallingShape.x
-    const offsetY = this.#fallingShape.y
-    const block = this.#fallingShape.block
-    this.board = this.mergeMatrix(this.board, block.shape, offsetX, offsetY)
+    this.board = this.mergeMatrix(this.board, this.#fallingShape.block.shape, this.#fallingShape.x, this.#fallingShape.y)
   }
 
   drop(input) {
