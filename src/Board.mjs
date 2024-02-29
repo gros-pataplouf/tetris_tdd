@@ -4,7 +4,7 @@ import Matrix from "./Matrix.mjs";
 export class Board extends Matrix {
   width;
   height;
-  fallingShape = null;
+  #fallingShape = null;
   nextBoard = null;
 
   constructor(width, height) {
@@ -19,10 +19,10 @@ export class Board extends Matrix {
   }
 
   hasFalling() {
-    return this.fallingShape ? true : false
+    return this.#fallingShape ? true : false
   }
 
-  formatShape(input) {
+  #formatShape(input) {
     if (input instanceof Shape) {
       return input
     }
@@ -33,7 +33,7 @@ export class Board extends Matrix {
     if (this.hasFalling()) {
       throw new Error('already falling')
     }
-    const block = this.formatShape(input)
+    const block = this.#formatShape(input)
     const numOfEmptyFirstRows = block.shape.map(row => row.some(elt => elt !== '.') ? "F" : "E").join('').split('F')[0].length
     let offsetY = 0 - numOfEmptyFirstRows
     const offsetX = Math.floor((this.width - block.width)/2)
@@ -45,10 +45,10 @@ export class Board extends Matrix {
         }
       }
     }}
-    this.fallingShape = {block, x: offsetX, y: offsetY}
+    this.#fallingShape = {block, x: offsetX, y: offsetY}
   }
   currentCellCanMove(rowIndex, colIndex, dirX, dirY) {
-    const {block, x, y} = this.fallingShape;
+    const {block, x, y} = this.#fallingShape;
     const cellIsFull = () => block.shape[rowIndex][colIndex] !== '.'
     const isBorderCell = (dirX, dirY) => !block.shape[rowIndex + dirY] || !block.shape[rowIndex + dirY][colIndex + dirX] || block.shape[rowIndex + dirY][colIndex + dirX] === '.'
     const canMoveInDirection = (dirX, dirY) => this.board[y + rowIndex + dirY] &&  this.board[y + rowIndex + dirY][x+ colIndex + dirX] === '.'
@@ -58,9 +58,9 @@ export class Board extends Matrix {
     return true
   }
   moveCellOnNextBoard(rowIndex, colIndex, dirX, dirY) {
-    const {block, x, y} = this.fallingShape;
+    const {block, x, y} = this.#fallingShape;
     if (block.shape[rowIndex][colIndex] !== '.') {
-      const {block, x, y} = this.fallingShape;
+      const {block, x, y} = this.#fallingShape;
       this.nextBoard[rowIndex + y + dirY][colIndex + x + dirX] = block.shape[rowIndex][colIndex]
       this.nextBoard[rowIndex + y][colIndex + x] = '.'
     }
@@ -69,7 +69,7 @@ export class Board extends Matrix {
     if (!this.hasFalling()) {
       return false
     }
-    const {block, x, y} = this.fallingShape;
+    const {block, x, y} = this.#fallingShape;
     this.nextBoard = this.board.map(row => row.map(elt => elt)) // work on a copy while looking at next board, so current board can be overwritten without further looping
     for (let rowIndex = block.height - 1; rowIndex >= 0; rowIndex--) {
       for (let colIndex = dirX <= 0? 0: block.width -1; dirX <= 0? colIndex < block.width : colIndex >= 0; dirX <= 0? colIndex++ : colIndex--) { //loop from left to right or right to left
@@ -83,13 +83,13 @@ export class Board extends Matrix {
   }
 
   stopFalling() {
-      delete this.fallingShape
+      this.#fallingShape = null
   }
 
   #move(dirX, dirY) {
     this.board = this.nextBoard.map(row => row.map(elt => elt))
-    this.fallingShape.y += dirY
-    this.fallingShape.x += dirX   
+    this.#fallingShape.y += dirY
+    this.#fallingShape.x += dirX   
   }
   tick() {
     if (this.shapeCanMove(0,1)) {
