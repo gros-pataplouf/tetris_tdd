@@ -1,24 +1,21 @@
 import { Shape } from "./Shape.mjs";
-import { loopAndExecute } from "./helpers.mjs";
+import Matrix from "./Matrix.mjs";
 
-export class Board {
+export class Board extends Matrix {
   width;
   height;
   fallingShape = null;
   nextBoard = null;
 
   constructor(width, height) {
+    super()
     this.width = width;
     this.height = height;
     this.board = Array(height).fill('.').map(elt => Array.from('.'.repeat(width)))
   }
 
   toString() {
-    let boardToString = '';
-    for (let row of this.board) {
-      boardToString += row.concat('\n').join('')
-    }
-    return boardToString
+    return this.matrixToString(this.board)
   }
 
   hasFalling() {
