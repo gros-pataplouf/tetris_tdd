@@ -35,6 +35,12 @@ export class Board extends Matrix {
     this.#fallingShape = {block, x: offsetX, y: offsetY}
     return [offsetX, offsetY]
   }
+  #insertShape() {
+    const offsetX = this.#fallingShape.x
+    const offsetY = this.#fallingShape.y
+    const block = this.#fallingShape.block
+    return null
+  }
 
   drop(input) {
     if (this.hasFalling()) {
@@ -50,6 +56,7 @@ export class Board extends Matrix {
         }
       }
     }}
+    this.#insertShape()
   }
   currentCellCanMove(rowIndex, colIndex, dirX, dirY) {
     const {block, x, y} = this.#fallingShape;
