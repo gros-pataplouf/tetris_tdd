@@ -86,30 +86,30 @@ export class Board extends Matrix {
       delete this.fallingShape
   }
 
-  move(dirX, dirY) {
+  #move(dirX, dirY) {
     this.board = this.nextBoard.map(row => row.map(elt => elt))
     this.fallingShape.y += dirY
     this.fallingShape.x += dirX   
   }
   tick() {
     if (this.shapeCanMove(0,1)) {
-      this.move(0,1)
+      this.#move(0,1)
     } else {
       this.stopFalling()
     }}
   moveLeft() {
     if (this.shapeCanMove(-1, 0)) {
-      this.move(-1, 0)
+      this.#move(-1, 0)
     }
   }
   moveRight() {
     if (this.shapeCanMove(1, 0)) {
-      this.move(1, 0)
+      this.#move(1, 0)
     }
   }
   moveDown() {
     if (this.shapeCanMove(0, 1)) {
-      this.move(0, 1)
+      this.#move(0, 1)
     } else {
       this.stopFalling()
     }
