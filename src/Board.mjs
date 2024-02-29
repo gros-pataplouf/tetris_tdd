@@ -39,15 +39,6 @@ export class Board extends Matrix {
     const offsetX = this.#fallingShape.x
     const offsetY = this.#fallingShape.y
     const block = this.#fallingShape.block
-    return null
-  }
-
-  drop(input) {
-    if (this.hasFalling()) {
-      throw new Error('already falling')
-    }
-    const block = this.#formatShape(input)
-    const [offsetX, offsetY] = this.#setShapeOffset(block)
     for (let i = offsetY; i - offsetY < block.height; i++) {
       if (i >= 0) {
       for (let j = offsetX; j - offsetX < block.width; j++) {
@@ -56,6 +47,14 @@ export class Board extends Matrix {
         }
       }
     }}
+  }
+
+  drop(input) {
+    if (this.hasFalling()) {
+      throw new Error('already falling')
+    }
+    const block = this.#formatShape(input)
+    this.#setShapeOffset(block)
     this.#insertShape()
   }
   currentCellCanMove(rowIndex, colIndex, dirX, dirY) {
