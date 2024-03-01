@@ -2,8 +2,6 @@ import { Shape } from "./Shape.mjs";
 import Matrix from "./Matrix.mjs";
 
 export class Board extends Matrix {
-  width;
-  height;
   #fallingShape = null;
 
   constructor(width, height) {
