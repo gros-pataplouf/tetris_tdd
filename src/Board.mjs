@@ -11,10 +11,6 @@ export class Board extends MatrixToolsProvider {
     this.board = Array(height).fill('.').map(elt => Array.from('.'.repeat(width)))
   }
 
-  hasFalling() {
-    return this.#fallingShape ? true : false
-  }
-
   #formatShape(input) {
     if (input instanceof Shape) {
       return input
@@ -74,6 +70,10 @@ export class Board extends MatrixToolsProvider {
   #move(dirX, dirY) {
     this.#fallingShape.y += dirY
     this.#fallingShape.x += dirX
+  }
+
+  hasFalling() {
+    return this.#fallingShape ? true : false
   }
   tick() {
     if (this.shapeCanMove(0,1)) {
