@@ -1,6 +1,6 @@
-import Matrix from "./Matrix.mjs"
+import MatrixToolsProvider from "./Matrix.mjs"
 
-export class Shape extends Matrix{
+export class Shape extends MatrixToolsProvider {
     constructor(shape) {
         super()
         this.shape = shape.trim().split('\n').map(elt => elt.trim().split(''))

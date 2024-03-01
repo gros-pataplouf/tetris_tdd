@@ -1,7 +1,7 @@
 import { Shape } from "./Shape.mjs";
-import Matrix from "./Matrix.mjs";
+import MatrixToolsProvider from "./Matrix.mjs";
 
-export class Board extends Matrix {
+export class Board extends MatrixToolsProvider {
   #fallingShape = null;
 
   constructor(width, height) {
@@ -57,6 +57,7 @@ export class Board extends Matrix {
     }
     return true
   }
+
   shapeCanMove(dirX, dirY) {
     if (!this.hasFalling()) {
       return false

@@ -1,4 +1,4 @@
-export default class Matrix {
+export default class MatrixToolsProvider {
     matrixToString(input=this) {
         const joinedSubarrays =  input.map(elt => elt.join('')).map(x => x + '\n')
         const reconstitutedShapeString = joinedSubarrays.reduce((acc, subarr) => acc.concat(subarr))
