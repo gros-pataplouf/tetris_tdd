@@ -10,4 +10,7 @@ export class Shape extends MatrixToolsProvider {
      toString(){
         return this.matrixToString(this.shape)
     }
+    isBorderCell(rowIndex, colIndex, dirX, dirY) {
+      return !this.shape[rowIndex + dirY] || !this.shape[rowIndex + dirY][colIndex + dirX] || this.shape[rowIndex + dirY][colIndex + dirX] === '.';
+    }
 }
