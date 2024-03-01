@@ -17,6 +17,7 @@ export class Board extends MatrixToolsProvider {
     }
     return new Shape(input)
   }
+
   #setShapeOffset(block) {
     const numOfEmptyFirstRows = block.shape.map(row => row.some(elt => elt !== '.') ? "F" : "E").join('').split('F')[0].length
     let offsetY = 0 - numOfEmptyFirstRows
@@ -24,10 +25,10 @@ export class Board extends MatrixToolsProvider {
     this.#fallingShape = {block, x: offsetX, y: offsetY}
     return [offsetX, offsetY]
   }
+
   #insertShape() {
     this.board = this.mergeMatrix(this.board, this.#fallingShape.block.shape, this.#fallingShape.x, this.#fallingShape.y)
   }
-
 
   #currentCellCanMove(rowIndex, colIndex, dirX, dirY) {
     const {block, x, y} = this.#fallingShape;
@@ -65,6 +66,7 @@ export class Board extends MatrixToolsProvider {
     this.#fallingShape.y += dirY
     this.#fallingShape.x += dirX
   }
+
   drop(input) {
     if (this.hasFalling()) {
       throw new Error('already falling')
@@ -72,25 +74,30 @@ export class Board extends MatrixToolsProvider {
     const block = this.#formatShape(input)
     this.#setShapeOffset(block)
   }
+
   hasFalling() {
     return this.#fallingShape ? true : false
   }
+
   tick() {
     if (this.#shapeCanMove(0,1)) {
       this.#move(0,1)
     } else {
       this.#stopFalling()
     }}
+
   moveLeft() {
     if (this.#shapeCanMove(-1, 0)) {
       this.#move(-1, 0)
     }
   }
+  
   moveRight() {
     if (this.#shapeCanMove(1, 0)) {
       this.#move(1, 0)
     }
   }
+  
   moveDown() {
     if (this.#shapeCanMove(0, 1)) {
       this.#move(0, 1)
@@ -98,6 +105,7 @@ export class Board extends MatrixToolsProvider {
       this.#stopFalling()
     }
   }
+  
   toString() {
     if (this.#fallingShape) {
       const mergedMatrix = this.mergeMatrix(this.board, this.#fallingShape.block.shape, this.#fallingShape.x, this.#fallingShape.y)
