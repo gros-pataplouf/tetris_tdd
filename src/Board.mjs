@@ -5,7 +5,6 @@ export class Board extends Matrix {
   width;
   height;
   #fallingShape = null;
-  nextBoard = null;
 
   constructor(width, height) {
     super();
@@ -73,13 +72,10 @@ export class Board extends Matrix {
       return false
     }
     const {block, x, y} = this.#fallingShape;
-    this.nextBoard = this.board.map(row => row.map(elt => elt)) // work on a copy while looking at next board, so current board can be overwritten without further looping
     for (let rowIndex = block.height - 1; rowIndex >= 0; rowIndex--) {
       for (let colIndex = dirX <= 0? 0: block.width -1; dirX <= 0? colIndex < block.width : colIndex >= 0; dirX <= 0? colIndex++ : colIndex--) { //loop from left to right or right to left
         if (!this.currentCellCanMove(rowIndex, colIndex, dirX, dirY)) {
           return false
-        } else {
-          this.moveCellOnNextBoard(rowIndex, colIndex, dirX, dirY)
         }
       }}
     return true
