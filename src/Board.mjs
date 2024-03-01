@@ -28,13 +28,7 @@ export class Board extends MatrixToolsProvider {
     this.board = this.mergeMatrix(this.board, this.#fallingShape.block.shape, this.#fallingShape.x, this.#fallingShape.y)
   }
 
-  drop(input) {
-    if (this.hasFalling()) {
-      throw new Error('already falling')
-    }
-    const block = this.#formatShape(input)
-    this.#setShapeOffset(block)
-  }
+
   currentCellCanMove(rowIndex, colIndex, dirX, dirY) {
     const {block, x, y} = this.#fallingShape;
     const cellIsFull = () => block.shape[rowIndex][colIndex] !== '.'
@@ -71,7 +65,13 @@ export class Board extends MatrixToolsProvider {
     this.#fallingShape.y += dirY
     this.#fallingShape.x += dirX
   }
-
+  drop(input) {
+    if (this.hasFalling()) {
+      throw new Error('already falling')
+    }
+    const block = this.#formatShape(input)
+    this.#setShapeOffset(block)
+  }
   hasFalling() {
     return this.#fallingShape ? true : false
   }
