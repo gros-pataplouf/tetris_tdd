@@ -13,4 +13,7 @@ export class Shape extends MatrixToolsProvider {
     cellIsBorderCell(rowIndex, colIndex, dirX, dirY) {
       return !this.shape[rowIndex + dirY] || !this.shape[rowIndex + dirY][colIndex + dirX] || this.shape[rowIndex + dirY][colIndex + dirX] === '.';
     }
+    currentCellIsFull(rowIndex, colIndex) {
+      return this.shape[rowIndex][colIndex] !== '.'
+    }
 }
