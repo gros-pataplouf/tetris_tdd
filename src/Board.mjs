@@ -93,7 +93,6 @@ export class Board extends Matrix {
   }
 
   #move(dirX, dirY) {
-    this.board = this.nextBoard.map(row => row.map(elt => elt))
     this.#fallingShape.y += dirY
     this.#fallingShape.x += dirX
   }

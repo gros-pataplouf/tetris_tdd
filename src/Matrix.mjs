@@ -15,11 +15,12 @@ export default class Matrix {
     }
     mergeMatrix(targetInput, insertedInput, x, y) {
         const targetMatrix = structuredClone(targetInput)
-        const insertedMatrix = structuredClone(insertedInput)
-        for (let i = y; i - y < insertedMatrix.length; i++) {
-            if (i >= 0) {for (let j = x; j - x < insertedMatrix[0].length; j++) {
-              if (insertedMatrix[i] && insertedMatrix[i][j] !== '.' && targetMatrix[i][j] === '.') {
-                targetMatrix[i][j] = insertedMatrix[i - y][j-x]}}
+        const insertedMatrix = insertedInput
+        for (let i = 0; i  < insertedMatrix.length; i++) {
+            for (let j = 0; j < insertedMatrix[0].length; j++) {
+              if (insertedMatrix[i] && insertedMatrix[i][j] !== '.' && targetMatrix[i+y] && targetMatrix[i+y][j+x] === '.') {
+                targetMatrix[i+y][j+x] = insertedMatrix[i][j]
+            }
           }}
         return targetMatrix
     }
