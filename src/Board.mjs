@@ -60,7 +60,7 @@ export class Board extends MatrixToolsProvider {
     return true
   }
 
-  stopFalling() {
+  #stopFalling() {
       if (this.#fallingShape) {
         this.#insertShape()
         this.#fallingShape = null
@@ -79,7 +79,7 @@ export class Board extends MatrixToolsProvider {
     if (this.shapeCanMove(0,1)) {
       this.#move(0,1)
     } else {
-      this.stopFalling()
+      this.#stopFalling()
     }}
   moveLeft() {
     if (this.shapeCanMove(-1, 0)) {
@@ -95,7 +95,7 @@ export class Board extends MatrixToolsProvider {
     if (this.shapeCanMove(0, 1)) {
       this.#move(0, 1)
     } else {
-      this.stopFalling()
+      this.#stopFalling()
     }
   }
   toString() {
