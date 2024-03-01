@@ -13,9 +13,8 @@ export default class MatrixToolsProvider {
         }
         return targetMatrix
     }
-    mergeMatrix(targetInput, insertedInput, x, y) {
+    mergeMatrix(targetInput, insertedMatrix, x, y) {
         const targetMatrix = structuredClone(targetInput)
-        const insertedMatrix = insertedInput
         for (let i = 0; i  < insertedMatrix.length; i++) {
             for (let j = 0; j < insertedMatrix[0].length; j++) {
               if (insertedMatrix[i] && insertedMatrix[i][j] !== '.' && targetMatrix[i+y] && targetMatrix[i+y][j+x] === '.') {
