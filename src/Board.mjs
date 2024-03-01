@@ -29,7 +29,7 @@ export class Board extends MatrixToolsProvider {
   }
 
 
-  currentCellCanMove(rowIndex, colIndex, dirX, dirY) {
+  #currentCellCanMove(rowIndex, colIndex, dirX, dirY) {
     const {block, x, y} = this.#fallingShape;
     const cellIsFull = () => block.shape[rowIndex][colIndex] !== '.'
     const isBorderCell = (dirX, dirY) => !block.shape[rowIndex + dirY] || !block.shape[rowIndex + dirY][colIndex + dirX] || block.shape[rowIndex + dirY][colIndex + dirX] === '.'
@@ -40,14 +40,14 @@ export class Board extends MatrixToolsProvider {
     return true
   }
 
-  shapeCanMove(dirX, dirY) {
+  #shapeCanMove(dirX, dirY) {
     if (!this.hasFalling()) {
       return false
     }
     const {block, x, y} = this.#fallingShape;
     for (let rowIndex = block.height - 1; rowIndex >= 0; rowIndex--) {
       for (let colIndex = dirX <= 0? 0: block.width -1; dirX <= 0? colIndex < block.width : colIndex >= 0; dirX <= 0? colIndex++ : colIndex--) { //loop from left to right or right to left
-        if (!this.currentCellCanMove(rowIndex, colIndex, dirX, dirY)) {
+        if (!this.#currentCellCanMove(rowIndex, colIndex, dirX, dirY)) {
           return false
         }
       }}
@@ -76,23 +76,23 @@ export class Board extends MatrixToolsProvider {
     return this.#fallingShape ? true : false
   }
   tick() {
-    if (this.shapeCanMove(0,1)) {
+    if (this.#shapeCanMove(0,1)) {
       this.#move(0,1)
     } else {
       this.#stopFalling()
     }}
   moveLeft() {
-    if (this.shapeCanMove(-1, 0)) {
+    if (this.#shapeCanMove(-1, 0)) {
       this.#move(-1, 0)
     }
   }
   moveRight() {
-    if (this.shapeCanMove(1, 0)) {
+    if (this.#shapeCanMove(1, 0)) {
       this.#move(1, 0)
     }
   }
   moveDown() {
-    if (this.shapeCanMove(0, 1)) {
+    if (this.#shapeCanMove(0, 1)) {
       this.#move(0, 1)
     } else {
       this.#stopFalling()
