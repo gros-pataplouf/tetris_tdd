@@ -5,10 +5,11 @@ title: Tetris
 
  
 classDiagram
-    Matrix ..|> Shape
-    Matrix ..|> Board
-    Matrix: +matrixToString(input=this)
-    Matrix: +rotateMatrix(input=this)
+    MatrixToolsProvider ..|> Shape
+    MatrixToolsProvider ..|> Board
+    MatrixToolsProvider: +matrixToString(input=this)
+    MatrixToolsProvider: +rotateMatrix(input=this)
+    MatrixToolsProvider: +mergeMatrix(target, inserted, x, y)
     Shape --|> Tetromino
     RotatableComplex --|> Tetromino
     Shape --|> RotatingShape
@@ -28,19 +29,18 @@ classDiagram
     Board: +int height
     Board: +str[][] | null nextBoard - copy
     Board: +null | {block Tetromino, x int, y int} fallingShape 
-    Board: +toString()
-    Board: +hasFalling()
-    Board: +formatShape(shape)
-    Board: +drop(input)
+    Board: + toString()
+    Board: + hasFalling()
+    Board: + private formatShape(shape)
+    Board: + drop(input)
     Board: + stopFalling()
-    Board: +private move(dirX, dirY)
-    Board: +tick()
-    Board: +moveRight()
-    Board: +moveLeft()
-    Board: +moveDown()
-    Board: +currentCellCanMove(rowIndex, colIndex, dirX, dirY)
-    Board: +moveCellOnNextBoard(rowIndex, colIndex, dirX, dirY)
-    Board: +shapeCanMove(dirX, dirY)
+    Board: + private move(dirX, dirY)
+    Board: + tick()
+    Board: + moveRight()
+    Board: + moveLeft()
+    Board: + moveDown()
+    Board: + private currentCellCanMove(rowIndex, colIndex, dirX, dirY)
+    Board: + private shapeCanMove(dirX, dirY)
 
 
 

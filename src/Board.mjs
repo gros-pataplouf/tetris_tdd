@@ -11,14 +11,6 @@ export class Board extends MatrixToolsProvider {
     this.board = Array(height).fill('.').map(elt => Array.from('.'.repeat(width)))
   }
 
-  toString() {
-    if (this.#fallingShape) {
-      const mergedMatrix = this.mergeMatrix(this.board, this.#fallingShape.block.shape, this.#fallingShape.x, this.#fallingShape.y)
-      return this.matrixToString(mergedMatrix)
-    }
-    return this.matrixToString(this.board)
-  }
-
   hasFalling() {
     return this.#fallingShape ? true : false
   }
@@ -105,5 +97,12 @@ export class Board extends MatrixToolsProvider {
     } else {
       this.stopFalling()
     }
+  }
+  toString() {
+    if (this.#fallingShape) {
+      const mergedMatrix = this.mergeMatrix(this.board, this.#fallingShape.block.shape, this.#fallingShape.x, this.#fallingShape.y)
+      return this.matrixToString(mergedMatrix)
+    }
+    return this.matrixToString(this.board)
   }
 }
