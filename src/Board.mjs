@@ -33,12 +33,15 @@ export class Board extends MatrixToolsProvider {
   #currentCellCanMove(rowIndex, colIndex, dirX, dirY) {
     const {block, x, y} = this.#fallingShape;
     const cellIsFull = () => block.shape[rowIndex][colIndex] !== '.'
-    const isBorderCell = (dirX, dirY) => !block.shape[rowIndex + dirY] || !block.shape[rowIndex + dirY][colIndex + dirX] || block.shape[rowIndex + dirY][colIndex + dirX] === '.'
     const canMoveInDirection = (dirX, dirY) => this.board[y + rowIndex + dirY] &&  this.board[y + rowIndex + dirY][x+ colIndex + dirX] === '.'
     if (cellIsFull() && isBorderCell(dirX, dirY)) {
       return canMoveInDirection(dirX, dirY) //check for full border cells whether there space on the board
     }
     return true
+
+    function isBorderCell() {
+      return (dirX, dirY) => !block.shape[rowIndex + dirY] || !block.shape[rowIndex + dirY][colIndex + dirX] || block.shape[rowIndex + dirY][colIndex + dirX] === '.';
+    }
   }
 
   #shapeCanMove(dirX, dirY) {
