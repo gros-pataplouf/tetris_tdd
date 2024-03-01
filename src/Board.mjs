@@ -59,14 +59,6 @@ export class Board extends Matrix {
     }
     return true
   }
-  moveCellOnNextBoard(rowIndex, colIndex, dirX, dirY) {
-    const {block, x, y} = this.#fallingShape;
-    if (block.shape[rowIndex][colIndex] !== '.') {
-      const {block, x, y} = this.#fallingShape;
-      this.nextBoard[rowIndex + y + dirY][colIndex + x + dirX] = block.shape[rowIndex][colIndex]
-      this.nextBoard[rowIndex + y][colIndex + x] = '.'
-    }
-  } 
   shapeCanMove(dirX, dirY) {
     if (!this.hasFalling()) {
       return false
