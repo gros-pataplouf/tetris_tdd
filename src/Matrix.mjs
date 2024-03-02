@@ -4,9 +4,6 @@ export default class MatrixToolsProvider {
         const reconstitutedShapeString = joinedSubarrays.reduce((acc, subarr) => acc.concat(subarr))
         return reconstitutedShapeString
     }
-    matrixLooper() {
-        
-    }
     rotateMatrix(input=this) {
         const targetMatrix = input.map(elt => elt.map(x => x))
         for (let i = 0; i < input.length; i ++) {
