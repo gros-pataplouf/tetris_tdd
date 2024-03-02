@@ -49,6 +49,74 @@ describe('a falling tetromino can be rotated', () => {
     })
 })
 
+describe('a falling tetromino can be rotated', () => {
+    let board
+    beforeEach(() => {
+        board = new Board(10, 6)
+        
+    })
+    test('can be rotated right', () => {
+        board.drop(Tetromino.T_SHAPE)
+        board.rotateRight()
+        expect(board.toString()).to.equalShape(
+            `....T.....
+             ....TT....
+             ....T.....
+             ..........
+             ..........
+             ..........`
+          );
+    }),
+    test('can be rotated left', () => {
+        board.drop(Tetromino.T_SHAPE)
+        board.rotateLeft()
+        expect(board.toString()).to.equalShape(
+            `....T.....
+             ...TT.....
+             ....T.....
+             ..........
+             ..........
+             ..........`
+          );
+    }), 
+    test('4 rotations lead back to beginning', () => {
+        board.drop(Tetromino.T_SHAPE)
+        for (let i = 0; i < 4; i++) {
+            board.rotateLeft()
+        }
+        expect(board.toString()).to.equalShape(
+            `....T.....
+             ...TTT....
+             ..........
+             ..........
+             ..........
+             ..........`
+          );
+    })
+})
+
+
+describe('cannot rotate when no room', () => {
+    let board
+    beforeEach(() => {
+        board = new Board(10, 6)
+        
+    })
+    test('can\'t go over top of board', () => {
+        board.drop(Tetromino.I_SHAPE)
+        board.rotateRight()
+        expect(board.toString()).to.equalShape(
+            `..IIII....
+             ..........
+             ..........
+             ..........
+             ..........
+             ..........`
+          );
+    })
+})
+
+
 
 // # Level 6: Rotating falling tetrominoes
 
