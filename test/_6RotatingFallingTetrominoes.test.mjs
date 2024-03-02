@@ -4,7 +4,23 @@ import { Tetromino } from "../src/Tetromino.mjs"
 import { fallToBottom, moveDownUntilStops, moveToLeftUntilStops, moveToRightUntilStops } from "./testHelpers.mjs"
 
 describe('a falling tetromino can be rotated', () => {
-    test.skip('can be rotated right', () => {}),
+    let board
+    beforeEach(() => {
+        board = new Board(10, 6)
+        
+    })
+    test('can be rotated right', () => {
+        board.drop(Tetromino.T_SHAPE)
+        board.rotateRight()
+        expect(board.toString()).to.equalShape(
+            `....T.....
+             ....TT....
+             ....T.....
+             ..........
+             ..........
+             ..........`
+          );
+    }),
     test.skip('can be rotated left', () => {}), 
     test.skip('4 right rotations lead back to beginning', () => {}),
     test.skip('4 left rotations lead back to beginning', () => {}),
