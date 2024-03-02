@@ -106,6 +106,11 @@ export class Board extends MatrixToolsProvider {
   rotateRight() {
     this.#fallingShape.block = this.#fallingShape.block.rotateRight()
   }
+
+  rotateLeft() {
+    this.#fallingShape.block = this.#fallingShape.block.rotateLeft()
+  }
+
   
   toString() {
     if (this.#fallingShape) {

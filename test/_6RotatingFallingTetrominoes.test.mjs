@@ -21,7 +21,18 @@ describe('a falling tetromino can be rotated', () => {
              ..........`
           );
     }),
-    test.skip('can be rotated left', () => {}), 
+    test('can be rotated left', () => {
+        board.drop(Tetromino.T_SHAPE)
+        board.rotateLeft()
+        expect(board.toString()).to.equalShape(
+            `....T.....
+             ...TT.....
+             ....T.....
+             ..........
+             ..........
+             ..........`
+          );
+    }), 
     test.skip('4 right rotations lead back to beginning', () => {}),
     test.skip('4 left rotations lead back to beginning', () => {}),
     test.skip('1 right rotation equals 3 left rotations', () => {})
