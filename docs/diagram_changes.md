@@ -5,15 +5,15 @@ title: Tetris
 
  
 classDiagram
-    MatrixToolsProvider ..|> Shape
     MatrixToolsProvider ..|> Board
+    MatrixToolsProvider ..|> Shape
     MatrixToolsProvider: +matrixToString(input=this)
     MatrixToolsProvider: +rotateMatrix(input=this)
     MatrixToolsProvider: +mergeMatrix(target, inserted, x, y)
+    RotatableSimple --|> RotatingShape
+    Shape --|> RotatingShape
     Shape --|> Tetromino
     RotatableComplex --|> Tetromino
-    Shape --|> RotatingShape
-    RotatableSimple --|> RotatingShape
     RotatableSimple: +rotateRight()
     RotatableSimple: +rotateLeft()
     RotatableComplex: +int orientations
@@ -23,13 +23,15 @@ classDiagram
     Shape: +str[][] shape
     Shape: +int height
     Shape: +int width
-    Shape: + private matrixToString(matrix)
     Shape: +toString()
+    Shape: +currentCellIsFull(rowIndex, colIndex)
+    Shape: +nextCellInDirectionEmptyOrNull(rowIndex, colIndex, dirX, dirY)
+
     Board: +int width
     Board: +int height
-    Board: +str[][] | null nextBoard - copy
-    Board: +null | {block Tetromino, x int, y int} fallingShape 
+    Board: +null | {block Tetromino, x int, y int} private fallingShape 
     Board: + private formatShape(shape)
+    Board: + private setShapeOffset(shape)
     Board: + private move(dirX, dirY)
     Board: + private stopFalling()
     Board: + private shapeCanMove(dirX, dirY)
