@@ -1,5 +1,4 @@
-import { test  } from "vitest";
-import {expect} from "chai";
+import { test, expect  } from "vitest";
 import { Board } from "../src/Board.mjs";
 import { Tetromino } from "../src/Tetromino.mjs";
 import { fallToBottom } from "./testHelpers.mjs";

@@ -1,5 +1,4 @@
-import { beforeEach, describe, test } from "vitest";
-import { expect } from "chai";
+import { beforeEach, describe, test, expect } from "vitest";
 import { Board } from "../src/Board.mjs";
 
 describe("Falling blocks", () => {

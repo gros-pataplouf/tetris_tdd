@@ -1,5 +1,4 @@
-import { describe, test } from "vitest";
-import { expect } from "chai";
+import { describe, test, expect } from "vitest";
 import { Tetromino } from "../src/Tetromino.mjs";
 
 function distinctOrientations(shape) {
