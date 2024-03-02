@@ -69,6 +69,12 @@ export class Board extends MatrixToolsProvider {
     try {this.mergeMatrix(this.board, rotatedShape.shape, this.#fallingShape.x, this.#fallingShape.y ); return true}  catch(e) {return false}
   }
 
+  #rotate(dir) {
+    if (this.#canRotate()){
+      this.#fallingShape.block = this.#fallingShape.block.rotateRight()
+    }
+  }
+
   drop(input) {
     if (this.hasFalling()) {
       throw new Error('already falling')
@@ -110,7 +116,7 @@ export class Board extends MatrixToolsProvider {
 
   rotateRight() {
     if (this.#canRotate(1)) {
-      this.#fallingShape.block = this.#fallingShape.block.rotateRight()
+      this.#rotate()
     }
   }
 
