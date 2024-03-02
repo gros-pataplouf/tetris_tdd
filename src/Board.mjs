@@ -76,7 +76,11 @@ export class Board extends MatrixToolsProvider {
 
   #rotate(dir) {
     if (this.#canRotate(dir)){
-      this.#fallingShape.block = this.#fallingShape.block.rotateRight()
+      if (dir === 1) {
+        this.#fallingShape.block = this.#fallingShape.block.rotateRight()
+      } else {
+        this.#fallingShape.block = this.#fallingShape.block.rotateLeft()
+      }
     }
   }
 
@@ -126,8 +130,9 @@ export class Board extends MatrixToolsProvider {
   }
 
   rotateLeft() {
-    this.#fallingShape.block = this.#fallingShape.block.rotateLeft()
-  }
+    if (this.#canRotate(-1)) {
+      this.#rotate(-1)
+    }  }
 
   
   toString() {
