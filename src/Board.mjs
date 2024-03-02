@@ -116,7 +116,7 @@ export class Board extends MatrixToolsProvider {
 
   rotateRight() {
     if (this.#canRotate(1)) {
-      this.#rotate()
+      this.#rotate(1)
     }
   }
 
