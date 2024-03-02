@@ -21,7 +21,4 @@ test('empty cells of the dropped forms do not overwrite non-empty cells of anoth
         ..OO.
         `
     )
-    
-
-
 })
