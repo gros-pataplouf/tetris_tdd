@@ -20,7 +20,7 @@ export default class MatrixToolsProvider {
         const targetMatrix = structuredClone(targetInput)
         for (let i = 0; i  < insertedMatrix.length; i++) {
             for (let j = 0; j < insertedMatrix[0].length; j++) {
-              if (insertedMatrix[i][j] !== '.' && targetMatrix[i+y] && targetMatrix[i+y][j+x] === '.') {
+              if (insertedMatrix[i][j] !== '.' && targetMatrix[i+y][j+x] === '.') {
                 targetMatrix[i+y][j+x] = insertedMatrix[i][j]
             }
           }}
