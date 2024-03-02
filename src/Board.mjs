@@ -67,8 +67,7 @@ export class Board extends MatrixToolsProvider {
   #canRotate(dir) {
     const rotatedShape = dir === 1  ? this.#fallingShape.block.rotateRight() : this.#fallingShape.block.rotateLeft()
     try {
-      this.mergeMatrix(this.board, rotatedShape.shape, this.#fallingShape.x, this.#fallingShape.y )
-      return true
+      return this.canMergeMatrix(this.board, rotatedShape.shape, this.#fallingShape.x, this.#fallingShape.y )
     }  catch(e) {
       return false
     }

@@ -13,6 +13,14 @@ export default class MatrixToolsProvider {
         }
         return targetMatrix
     }
+    canMergeMatrix(targetMatrix, insertedMatrix, x, y) {
+        for (let i = 0; i  < insertedMatrix.length; i++) {
+            for (let j = 0; j < insertedMatrix[0].length; j++) {
+              if (insertedMatrix[i][j] !== '.' && (!targetMatrix[i+y] || !targetMatrix[i+y][j+x])) {
+                return false
+        }}}
+        return true
+    }
     mergeMatrix(targetInput, insertedMatrix, x, y) {
         const targetMatrix = structuredClone(targetInput)
         for (let i = 0; i  < insertedMatrix.length; i++) {
