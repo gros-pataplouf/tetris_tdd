@@ -3,6 +3,15 @@ import { Board } from "../src/Board.mjs"
 import { Tetromino } from "../src/Tetromino.mjs"
 import { fallToBottom, moveDownUntilStops, moveToLeftUntilStops, moveToRightUntilStops } from "./testHelpers.mjs"
 
+describe('a falling tetromino can be rotated', () => {
+    test.skip('can be rotated right', () => {}),
+    test.skip('can be rotated left', () => {}), 
+    test.skip('4 right rotations lead back to beginning', () => {}),
+    test.skip('4 left rotations lead back to beginning', () => {}),
+    test.skip('1 right rotation equals 3 left rotations', () => {})
+})
+
+
 // # Level 6: Rotating falling tetrominoes
 
 // > Let's keep adding player controls: rotations.
